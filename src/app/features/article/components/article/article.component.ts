@@ -7,5 +7,5 @@ import { Article } from 'src/app/shared/models';
   styleUrls: ['./article.component.scss'],
 })
 export class ArticleComponent {
-  @Input() article!: Article;
+  @Input() article: Article | undefined = undefined;
 }
