@@ -17,6 +17,18 @@ jobs:
        - run: npm ci
        - run: npm run build
 
+  test:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v3.3.0
+       - name: Use Node.js ${{ matrix.node-version }}
+         uses: actions/setup-node@v3
+         with:
+           node-version: ${{ matrix.node-version }}
+           cache: 'npm'
+       - run: npm ci
+       - run: npm run test --code-coverage --watch=false --browsers ChromeHeadless
+
   publish:
     runs-on: ubuntu-latest
     needs: [build]
@@ -34,7 +46,7 @@ jobs:
         run: npm install
 
       - name: Build app
-        run: npx nx run code-gen:build:production
+        run: npm run build
 
       - name: Semantic release
         uses: nick-fields/retry@v2
