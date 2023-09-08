@@ -27,7 +27,7 @@ jobs:
            node-version: ${{ matrix.node-version }}
            cache: 'npm'
        - run: npm ci
-       - run: npm run test --code-coverage --watch=false --browsers ChromeHeadless
+       - run: npm run test --code-coverage --watch=false --browsers=ChromeHeadless
 
   publish:
     runs-on: ubuntu-latest
