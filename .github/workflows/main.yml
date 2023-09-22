@@ -17,21 +17,33 @@ jobs:
        - run: npm ci
        - run: npm run build
 
-  test:
-     runs-on: ubuntu-latest
-     steps:
-       - uses: actions/checkout@v3.3.0
-       - name: Use Node.js ${{ matrix.node-version }}
-         uses: actions/setup-node@v3
-         with:
-           node-version: ${{ matrix.node-version }}
-           cache: 'npm'
-       - run: npm ci
-       - run: npm test -- --watch=false --browsers=ChromeHeadless
+  unit-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npm test -- --watch=false --browsers=ChromeHeadless
+
+  e2e-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+      - run: npx cypress run
 
   publish:
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: [build, unit-test]
     permissions:
       contents: write
 
