@@ -6,24 +6,29 @@
                 <mat-label>Keywords</mat-label>
                 <input matInput
                        placeholder="Search..."
-                       formControlName="q">
+                       formControlName="q"
+                       data-cy="form-input-query">
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Choose a date</mat-label>
                 <input matInput
                        [matDatepicker]="picker"
-                       formControlName="from">
+                       formControlName="from"
+                       data-cy="form-input-date">
                 <mat-datepicker-toggle matIconSuffix
-                                       [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                                       [for]="picker"
+                                       data-cy="form-input-date-toggle"></mat-datepicker-toggle>
+                <mat-datepicker #picker
+                                data-cy="form-input-date-picker"></mat-datepicker>
             </mat-form-field>
         </div>
 
         <div class="w-full flex justify-center items-center">
             <mat-form-field>
                 <mat-label>Sort</mat-label>
-                <mat-select formControlName="sortBy">
+                <mat-select formControlName="sortBy"
+                            data-cy="form-input-sort">
                     <mat-option *ngFor="let sortByOption of sortByOptions"
                                 [value]="sortByOption">{{ sortByOption | titlecase }}</mat-option>
                 </mat-select>
@@ -34,7 +39,8 @@
     <div class="w-full flex items-center justify-center">
         <button mat-raised-button
                 color="primary"
-                (click)="onSearch()">Search
+                (click)="onSearch()"
+                data-cy="form-submit-button">Search
         </button>
     </div>
 
