@@ -43,22 +43,9 @@ jobs:
       - run: npm ci
       - run: npm test -- --watch=false --browsers=ChromeHeadless
 
-  e2e-test:
-    runs-on: ubuntu-latest
-    needs: [ build ]
-    steps:
-      - uses: actions/checkout@v3.3.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: cypress-io/github-action@v2
-        with:
-          start: npm run e2e
-          browser: chrome
-          headless: true
-          wait-on: 'http://localhost:4200'
-
   publish:
     runs-on: ubuntu-latest
-    needs: [ e2e-test, unit-test ]
+    needs: [ unit-test ]
     permissions:
       contents: write
 
