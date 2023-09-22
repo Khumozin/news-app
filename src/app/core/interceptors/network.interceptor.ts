@@ -8,8 +8,6 @@ import { environment } from '../../../environments/environment.development';
 export class NetworkInterceptor implements HttpInterceptor {
   private readonly apiKey = environment.apiKey;
 
-  constructor() {}
-
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
