@@ -49,12 +49,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3.3.0
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: cypress-io/github-action@v2
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
-      - run: npm ci
-      - run: npx cypress run
+          start: npm run e2e
+          browser: chrome
+          headless: true
+          wait-on: 'http://localhost:4200'
 
   publish:
     runs-on: ubuntu-latest
