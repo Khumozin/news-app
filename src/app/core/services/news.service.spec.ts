@@ -2,14 +2,12 @@ import { HttpClientTestingModule, HttpTestingController } from '@angular/common/
 import { TestBed } from '@angular/core/testing';
 import { finalize } from 'rxjs';
 import { NewsApiOkResponse, SearchParam } from 'src/app/shared/models';
-import { environment } from 'src/environments/environment.development';
 
 import { NewsService } from './news.service';
 
 describe('NewsService', () => {
   let service: NewsService;
   let httpController: HttpTestingController;
-  let url = environment.newApiUrl;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
