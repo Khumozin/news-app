@@ -194,7 +194,7 @@ describe('Test App', () => {
 
     cy.get('[data-cy="form-input-date-toggle"]').click();
 
-    cy.get('span').contains(`${day}`).click();
+    cy.get('span').contains('.mat-calendar-body-cell-content',`${day}`).click();
 
     cy.get('[data-cy="form-input-sort"]')
       .click()
