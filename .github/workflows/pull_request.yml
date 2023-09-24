@@ -52,11 +52,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Cypress run
-        uses: cypress-io/github-action@v5
+      - name: Run cypress e2e tests
+        uses: cypress-io/github-action@v2
         with:
-          start: npm run start
+          start: npm run e2e
           browser: chrome
-          run: npx cypress run
-          wait-on: 'http://localhost:4200/en'
-          wait-on-timeout: 180
+          headless: true
+          wait-on: 'http://localhost:4200'
