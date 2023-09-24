@@ -57,6 +57,6 @@ jobs:
         with:
           start: npm run start
           browser: chrome
+          run: npx cypress run
           wait-on: 'http://localhost:4200/en'
           wait-on-timeout: 180
-          run: npx cypress run
