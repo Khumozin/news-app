@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/Khumozin/news-app/compare/v1.1.0...v1.1.1) (2023-09-28)
+
+
+### Bug Fixes
+
+* **shared:** fix lint warnings ([af8a860](https://github.com/Khumozin/news-app/commit/af8a8603c01d9d65b4a308e7a718f1b3002e80c3))
+
 # [1.1.0](https://github.com/Khumozin/news-app/compare/v1.0.0...v1.1.0) (2023-09-28)
 
 
