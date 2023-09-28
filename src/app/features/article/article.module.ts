@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { ArticleRoutingModule } from './article-routing.module';
 import { ArticleComponent } from './components';
@@ -29,7 +30,8 @@ import { ArticlesComponent } from './pages/articles/articles.component';
     ReactiveFormsModule,
     MatPaginatorModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    SharedModule,
   ],
 })
 export class ArticleModule {}

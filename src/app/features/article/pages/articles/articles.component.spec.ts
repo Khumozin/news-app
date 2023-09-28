@@ -14,6 +14,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
 import { NewsService } from 'src/app/core/services';
+import { SkeletonDirective } from 'src/app/shared/directives';
 import { NewsApiErrorResponse, NewsApiOkResponse } from 'src/app/shared/models';
 
 import { ArticlesComponent } from './articles.component';
@@ -26,7 +27,7 @@ describe('ArticlesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ArticlesComponent],
+      declarations: [ArticlesComponent, SkeletonDirective],
       imports: [
         HttpClientTestingModule,
         MatSnackBarModule,

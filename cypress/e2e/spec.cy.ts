@@ -186,7 +186,12 @@ describe('Test App', () => {
     const date = new Date();
     const day = date.getDate();
 
-    cy.intercept('GET', 'https://newsapi.org/v2/everything*', API_RESPONSE);
+    cy.intercept('GET', 'https://newsapi.org/v2/everything*', (req) => {
+      req.reply({
+        body: API_RESPONSE,
+        delay: 75,
+      });
+    });
 
     cy.get('div').contains(`0 of 0`);
 
@@ -194,7 +199,9 @@ describe('Test App', () => {
 
     cy.get('[data-cy="form-input-date-toggle"]').click();
 
-    cy.get('span').contains('.mat-calendar-body-cell-content',`${day}`).click();
+    cy.get('span')
+      .contains('.mat-calendar-body-cell-content', `${day}`)
+      .click();
 
     cy.get('[data-cy="form-input-sort"]')
       .click()
@@ -203,6 +210,8 @@ describe('Test App', () => {
       .click();
 
     cy.get('[data-cy="form-submit-button"]').click();
+
+    cy.get('skeleton-rect').should('have.length.greaterThan', 1);
 
     cy.get('div').contains(`${API_RESPONSE.totalResults}`);
 
