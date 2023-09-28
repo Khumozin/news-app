@@ -16,6 +16,7 @@ describe('SkeletonDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   let vcr: ViewContainerRef;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tr: TemplateRef<any>;
 
   beforeEach(() => {
@@ -47,6 +48,7 @@ describe('SkeletonDirective - Negative Tests', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   let vcr: ViewContainerRef;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tr: TemplateRef<any>;
 
   beforeEach(() => {
