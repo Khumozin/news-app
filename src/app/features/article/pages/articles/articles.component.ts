@@ -5,7 +5,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { catchError, map, of } from 'rxjs';
+import { catchError, finalize, map, of } from 'rxjs';
 
 import { NewsService } from '../../../../core/services';
 import { Article, NewsApiErrorResponse, SearchParam } from '../../../../shared/models';
@@ -23,6 +23,7 @@ export class ArticlesComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
   public articles: Array<Article> = [];
+  public isLoading = false;
   public totalItems = 0;
   public pageSize = 10;
   public pageIndex = 0;
@@ -67,6 +68,8 @@ export class ArticlesComponent {
   }
 
   getArticles(query: SearchParam): void {
+    this.isLoading = true;
+
     this.newsService
       .getArticles(query)
       .pipe(
@@ -76,6 +79,7 @@ export class ArticlesComponent {
           return response.articles;
         }),
         takeUntilDestroyed(this.destroyRef),
+        finalize(() => (this.isLoading = false)),
         catchError((e) => of(e))
       )
       .subscribe({
