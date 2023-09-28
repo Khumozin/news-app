@@ -45,10 +45,11 @@
     </div>
 
     <div class="w-full grid grid-cols-2 gap-8 mt-5">
-        <ng-container *ngFor="let article of articles">
-            <article [article]="article"></article>
+        <ng-container *skeleton="isLoading; repeat: 3; height: '320px';">
+            <ng-container *ngFor="let article of articles">
+                <article [article]="article"></article>
+            </ng-container>
         </ng-container>
-
     </div>
 
     <div class="w-full h-40 flex items-center justify-center">
