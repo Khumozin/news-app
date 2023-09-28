@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Article } from 'src/app/shared/models';
+
+import { Article } from '../../../../shared/models';
 
 @Component({
   selector: 'article',

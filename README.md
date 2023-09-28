@@ -1,27 +1,109 @@
-# NewsApp
+# News App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+This README provides an overview of a News App built with Angular, Angular Material & Tailwindcss, Semantic Release, GitHub Actions for CI/CD, Cypress for end-to-end tests, and Jasmine & Karma for unit tests. This app fetches news data from [newsapi.org](https://newsapi.org/) using their REST API.
 
-## Development server
+## Table of Contents
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Running the Application](#running-the-application)
+- [Running Tests](#running-tests)
+- [Deployment](#deployment)
+- [Continuous Integration](#continuous-integration)
+- [Contributing](#contributing)
+- [License](#license)
 
-## Code scaffolding
+## Features
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- Display news articles from various sources and categories.
+- Search for news articles using keywords.
+- View detailed information about individual news articles.
+- Responsive design for mobile and desktop.
+- End-to-end tests to ensure app functionality.
+- Unit tests for robust code quality.
 
-## Build
+## Getting Started
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Clone the repository to your local machine:
 
-## Running unit tests
+   ```bash
+   git clone https://github.com/your-username/news-app.git
+   ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+2. Change to the project directory:
 
-## Running end-to-end tests
+   ```bash
+   cd news-app
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Install the project dependencies:
 
-## Further help
+   ```bash
+   npm install
+   ```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+4. Build the application:
+
+   ```bash
+   ng build
+   ```
+
+## Project Structure
+
+The project structure is organized as follows:
+
+- `src/app`: Contains the Angular application components, services, and modules.
+- `src/assets`: Includes static assets like images, icons, and styles.
+- `cypress`: Contains end-to-end test files.
+- `karma.conf.js`: Configuration file for Karma and Jasmine unit-testing.
+- `.github/workflows`: Configuration files for Github Actions and Semantic Release.
+
+## Running the Application
+
+To run the application locally, use the following command:
+
+```bash
+ng serve
+```
+
+This will start a development server, and you can access the app in your web browser at `http://localhost:4200`.
+
+## Running Tests
+
+### Unit Tests with Jasmine & Karma
+
+You can run unit tests using the following command:
+
+```bash
+ng test --code-coverage
+```
+
+### End-to-End Tests with Cypress
+
+You can run end-to-end tests using the following command:
+
+```bash
+ng serve --port=4200
+```
+
+```bash
+npx cypress run
+```
+
+## Continuous Integration
+
+Continuous Integration (CI) is set up using GitHub Actions to automate the build, test, and deployment processes. The workflow can be found in the .github/workflows directory. Make sure to configure the necessary environment variables and deployment settings in your CI/CD platform.
+
+## Contributing
+
+If you would like to contribute to this project, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and test them thoroughly.
+4. Create a pull request with a clear description of you changes.
+
+
+## License
+This News App project is licensed under the `MIT License`. Feel free to use and modify it as per your requirements.
