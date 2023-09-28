@@ -44,7 +44,7 @@
         </button>
     </div>
 
-    <div class="w-full grid grid-cols-2 gap-8 mt-5">
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mt-5 px-4">
         <ng-container *skeleton="isLoading; repeat: 3; height: '320px';">
             <ng-container *ngFor="let article of articles">
                 <article [article]="article"></article>
