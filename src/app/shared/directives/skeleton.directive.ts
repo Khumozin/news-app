@@ -18,6 +18,7 @@ export class SkeletonDirective implements OnChanges {
   @Input('skeletonClassName') className!: string;
 
   constructor(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private templateRef: TemplateRef<any>,
     private viewContainerRef: ViewContainerRef
   ) {}

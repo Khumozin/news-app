@@ -7,16 +7,26 @@ import { SkeletonRectComponent } from './skeleton-rect.component';
 describe('SkeletonRectComponent', () => {
   let component: SkeletonRectComponent;
   let fixture: ComponentFixture<SkeletonRectComponent>;
-  let elementRef: ElementRef<HTMLElement>;
+  //   let elementRef: ElementRef<HTMLElement>;
 
   beforeEach(() => {
-    const mockElementRef: any = {
+    const mockElementRef = {
       nativeElement: {
         classList: {
-          add: (...args: any) => console.log(args),
+          add: (...args: string[]) => {
+            args;
+          },
         },
         style: {
-          setProperty: (...args: any) => console.log(args),
+          setProperty: (
+            property: string,
+            value: string | null,
+            priority?: string | undefined
+          ) => {
+            property;
+            value;
+            priority;
+          },
         },
       },
     };
@@ -34,16 +44,10 @@ describe('SkeletonRectComponent', () => {
     fixture = TestBed.createComponent(SkeletonRectComponent);
     component = fixture.componentInstance;
 
-    elementRef = TestBed.inject(ElementRef<HTMLElement>);
-
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  //   it('should add className', () => {
-  //     expect(component.className).toEqual('rounded-sm');
-  //   });
 });
