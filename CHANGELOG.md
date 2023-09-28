@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/Khumozin/news-app/compare/v1.0.0...v1.1.0) (2023-09-28)
+
+
+### Features
+
+* **shared:** implement loading skeleton ([9c22b94](https://github.com/Khumozin/news-app/commit/9c22b94cfcd771cb779fe7c7dc6ae7eff9f4d81b))
+
 # 1.0.0 (2023-09-08)
 
 
