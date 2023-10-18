@@ -11,6 +11,7 @@
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
+    "cypress:run:ci": "npm run start & sleep 18 & npx cypress run",
     "lint": "ng lint"
   },
   "private": true,
