@@ -30,6 +30,29 @@ jobs:
       - run: npm ci
       - run: npm test -- --watch=false --browsers=ChromeHeadless
 
+  cypress-e2e-test:
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+      - run: npm ci
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm run start
+          browser: chrome
+          wait-on: 'http://localhost:4200'
+          wait-on-timeout: 180
+
   publish:
     runs-on: ubuntu-latest
     needs: [ unit-test ]
