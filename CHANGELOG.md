@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/Khumozin/news-app/compare/v1.1.1...v1.1.2) (2024-01-22)
+
+
+### Performance Improvements
+
+* **app:** migrate to Standalone API ([cc1e0c1](https://github.com/Khumozin/news-app/commit/cc1e0c1739641ea258e40187a1f00f82866eaa77))
+
 ## [1.1.1](https://github.com/Khumozin/news-app/compare/v1.1.0...v1.1.1) (2023-09-28)
 
 
