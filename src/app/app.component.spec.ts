@@ -11,12 +11,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
-import { NewsService } from './core/services';
+import { NewsService } from './features/article/services';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      imports: [
+    imports: [
         RouterTestingModule,
         HttpClientTestingModule,
         MatPaginatorModule,
@@ -26,11 +26,11 @@ describe('AppComponent', () => {
         MatDatepickerModule,
         MatButtonModule,
         MatNativeDateModule,
-        ReactiveFormsModule
-      ],
-      declarations: [AppComponent],
-      providers: [NewsService],
-    })
+        ReactiveFormsModule,
+        AppComponent
+    ],
+    providers: [NewsService],
+})
   );
 
   it('should create the app', () => {

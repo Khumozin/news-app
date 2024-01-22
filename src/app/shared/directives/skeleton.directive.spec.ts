@@ -7,6 +7,8 @@ import { SkeletonDirective } from './skeleton.directive';
   template: `<div
     *skeleton="isLoading; repeat: 3; width: 'rand'; className: 'rounded-sm'"
   ></div>`,
+  standalone: true,
+  imports: [SkeletonDirective],
 })
 class TestComponent {
   isLoading = true;
@@ -21,7 +23,7 @@ describe('SkeletonDirective', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [TestComponent, SkeletonDirective],
+      imports: [TestComponent, SkeletonDirective],
       providers: [ViewContainerRef, TemplateRef],
     });
 
@@ -59,7 +61,7 @@ describe('SkeletonDirective - Negative Tests', () => {
     ]);
 
     TestBed.configureTestingModule({
-      declarations: [TestComponent, SkeletonDirective],
+      imports: [TestComponent, SkeletonDirective],
       providers: [
         {
           provide: ViewContainerRef,
