@@ -32,15 +32,14 @@ describe('SkeletonRectComponent', () => {
     };
 
     TestBed.configureTestingModule({
-      declarations: [SkeletonRectComponent],
-      imports: [NoopAnimationsModule],
-      providers: [
+    imports: [NoopAnimationsModule, SkeletonRectComponent],
+    providers: [
         {
-          provide: ElementRef,
-          useValue: mockElementRef,
+            provide: ElementRef,
+            useValue: mockElementRef,
         },
-      ],
-    });
+    ],
+});
     fixture = TestBed.createComponent(SkeletonRectComponent);
     component = fixture.componentInstance;
 

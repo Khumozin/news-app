@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { environment } from '../../../environments/environment.development';
-import { NewsApiOkResponse, SearchParam } from '../../shared/models';
+import { environment } from '../../../../environments/environment.development';
+import { Article, NewsApiOkResponse, SearchParam } from '../models';
 
 function buildParams(searchParams: SearchParam) {
   let params = new HttpParams();
@@ -26,9 +26,11 @@ export class NewsService {
   private readonly url = environment.newApiUrl;
   private readonly http = inject(HttpClient);
 
-  getArticles(searchParams: SearchParam): Observable<NewsApiOkResponse> {
+  getArticles(
+    searchParams: SearchParam
+  ): Observable<NewsApiOkResponse<Article>> {
     const params = buildParams(searchParams);
 
-    return this.http.get<NewsApiOkResponse>(`${this.url}`, { params });
+    return this.http.get<NewsApiOkResponse<Article>>(`${this.url}`, { params });
   }
 }
