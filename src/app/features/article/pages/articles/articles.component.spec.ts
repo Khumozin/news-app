@@ -10,27 +10,25 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
-import { NewsService } from 'src/app/core/services';
+import { Article, NewsApiErrorResponse, NewsApiOkResponse } from 'src/app/features/article/models';
+import { NewsService } from 'src/app/features/article/services';
 import { SkeletonDirective } from 'src/app/shared/directives';
-import { NewsApiErrorResponse, NewsApiOkResponse } from 'src/app/shared/models';
 
 import { ArticlesComponent } from './articles.component';
 
 describe('ArticlesComponent', () => {
   let component: ArticlesComponent;
   let fixture: ComponentFixture<ArticlesComponent>;
-  let snackBar: MatSnackBar;
+
   let newsService: NewsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ArticlesComponent, SkeletonDirective],
       imports: [
         HttpClientTestingModule,
-        MatSnackBarModule,
         MatInputModule,
         MatFormFieldModule,
         MatSelectModule,
@@ -39,13 +37,15 @@ describe('ArticlesComponent', () => {
         ReactiveFormsModule,
         MatPaginatorModule,
         NoopAnimationsModule,
+        ArticlesComponent,
+        SkeletonDirective,
+        MatSnackBarModule,
       ],
       providers: [NewsService, DatePipe, DestroyRef],
     });
     fixture = TestBed.createComponent(ArticlesComponent);
     component = fixture.componentInstance;
 
-    snackBar = TestBed.inject(MatSnackBar);
     newsService = TestBed.inject(NewsService);
 
     fixture.detectChanges();
@@ -56,7 +56,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should open snackbar when openSnackBar is called', () => {
-    const spyOnOpenSnackBar = spyOn(snackBar, 'open');
+    const spyOnOpenSnackBar = spyOn(component, 'openSnackBar');
 
     component.openSnackBar('Hello');
 
@@ -79,7 +79,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should get articles when getArticles is called', () => {
-    const okResponse: NewsApiOkResponse = {
+    const okResponse: NewsApiOkResponse<Article> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
@@ -104,6 +104,8 @@ describe('ArticlesComponent', () => {
   });
 
   it('should throw HttpErrorResponse when getArticles is called', () => {
+    const spyOnOpenSnackBar = spyOn(component, 'openSnackBar');
+
     component.form.setValue({
       from: '2023-09-08',
       q: 'Bitcoin',
@@ -128,15 +130,13 @@ describe('ArticlesComponent', () => {
       )
     );
 
-    const spyOnOpenSnackBar = spyOn(snackBar, 'open');
-
     component.getArticles(query);
 
     expect(spyOnOpenSnackBar).toHaveBeenCalled();
   });
 
   it('should get articles when onSearch is called', () => {
-    const okResponse: NewsApiOkResponse = {
+    const okResponse: NewsApiOkResponse<Article> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
@@ -159,7 +159,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should get articles when handlePageEvent is called', () => {
-    const okResponse: NewsApiOkResponse = {
+    const okResponse: NewsApiOkResponse<Article> = {
       articles: [],
       status: 'ok',
       totalResults: 0,

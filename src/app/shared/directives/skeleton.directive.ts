@@ -7,7 +7,8 @@ function random(min: number, max: number): number {
 }
 
 @Directive({
-  selector: '[skeleton]',
+    selector: '[skeleton]',
+    standalone: true,
 })
 export class SkeletonDirective implements OnChanges {
   @Input('skeleton') isLoading = false;

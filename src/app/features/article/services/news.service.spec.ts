@@ -1,7 +1,7 @@
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { finalize } from 'rxjs';
-import { NewsApiOkResponse, SearchParam } from 'src/app/shared/models';
+import { Article, NewsApiOkResponse, SearchParam } from 'src/app/features/article/models';
 
 import { NewsService } from './news.service';
 
@@ -28,7 +28,7 @@ describe('NewsService', () => {
   });
 
   it('should return an observable of articles when getArticles is called', (done) => {
-    const mock: NewsApiOkResponse = {
+    const mock: NewsApiOkResponse<Article> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
