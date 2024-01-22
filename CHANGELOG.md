@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/Khumozin/news-app/compare/v1.1.2...v2.0.0) (2024-01-22)
+
+
+### Build System
+
+* **app:** upgrade angular/material to v17 ([ac64311](https://github.com/Khumozin/news-app/commit/ac64311bf28c5bb51f5d4a0ec1bd22674c4f5110))
+* **app:** upgrade to Angular V17 ([0d7b81d](https://github.com/Khumozin/news-app/commit/0d7b81dbcbf24eca8ff3e7da1d7ae8bffab7f93c))
+
+
+### BREAKING CHANGES
+
+* **app:** upgrade angular/material to v17
+* **app:** dependencies have been upgraded to latest (v17)
+
 ## [1.1.2](https://github.com/Khumozin/news-app/compare/v1.1.1...v1.1.2) (2024-01-22)
 
 
