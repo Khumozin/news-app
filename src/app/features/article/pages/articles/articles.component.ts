@@ -1,6 +1,6 @@
-import { DatePipe, DOCUMENT, NgFor, TitleCasePipe } from '@angular/common';
+import { DatePipe, DOCUMENT, TitleCasePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, DestroyRef, inject, NO_ERRORS_SCHEMA, ViewChild } from '@angular/core';
+import { Component, DestroyRef, Inject, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -31,7 +31,6 @@ import { NewsService } from '../../services';
     MatInputModule,
     MatDatepickerModule,
     MatSelectModule,
-    NgFor,
     MatOptionModule,
     MatButtonModule,
     ArticleComponent,
@@ -42,21 +41,21 @@ import { NewsService } from '../../services';
     MatNativeDateModule,
     DatePipe,
   ],
-  schemas: [NO_ERRORS_SCHEMA],
 })
 export class ArticlesComponent {
   private readonly newsService = inject(NewsService);
   private readonly datePipe = inject(DatePipe);
   private readonly destroyRef = inject(DestroyRef);
-  // private readonly snackBar = inject(MatSnackBar);
-  private readonly doc = inject(DOCUMENT);
+  private readonly snackBar = inject(MatSnackBar);
 
-  articles: Array<Article> = [];
-  isLoading = false;
-  totalItems = 0;
-  pageSize = 10;
-  pageIndex = 0;
+  articles = signal<Array<Article>>([]);
+  isLoading = signal<boolean>(false);
+  totalItems = signal<number>(0);
+  pageSize = signal<number>(10);
+  pageIndex = signal<number>(0);
+
   pageSizeOptions = [5, 10, 25];
+
   sortByOptions = Object.keys(SortBy).filter((item) =>
     isNaN(Number.parseInt(item))
   );
@@ -69,7 +68,7 @@ export class ArticlesComponent {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private snackBar: MatSnackBar) {}
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
   onSearch(): void {
     const query = this.buildQuery();
@@ -80,7 +79,7 @@ export class ArticlesComponent {
     const query = this.buildQuery();
     this.getArticles(query);
 
-    window.scrollTo({
+    this.document.defaultView?.scrollTo({
       behavior: 'smooth',
       top: 0,
     });
@@ -99,18 +98,18 @@ export class ArticlesComponent {
   }
 
   getArticles(query: SearchParam): void {
-    this.isLoading = true;
+    this.isLoading.set(true);
 
     this.newsService
       .getArticles(query)
       .pipe(
         map((response) => {
-          this.totalItems = response.totalResults;
+          this.totalItems.set(response.totalResults);
 
           return response.articles;
         }),
         takeUntilDestroyed(this.destroyRef),
-        finalize(() => (this.isLoading = false)),
+        finalize(() => this.isLoading.set(false)),
         catchError((e) => of(e))
       )
       .subscribe({
@@ -120,7 +119,7 @@ export class ArticlesComponent {
             return;
           }
 
-          this.articles = results;
+          this.articles.set(results);
         },
       });
   }

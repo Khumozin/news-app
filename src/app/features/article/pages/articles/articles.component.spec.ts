@@ -100,7 +100,7 @@ describe('ArticlesComponent', () => {
 
     component.getArticles(query);
 
-    expect(component.articles).toEqual(okResponse.articles);
+    expect(component.articles()).toEqual(okResponse.articles);
   });
 
   it('should throw HttpErrorResponse when getArticles is called', () => {
@@ -155,7 +155,7 @@ describe('ArticlesComponent', () => {
 
     component.onSearch();
 
-    expect(component.articles).toEqual(okResponse.articles);
+    expect(component.articles()).toEqual(okResponse.articles);
   });
 
   it('should get articles when handlePageEvent is called', () => {
@@ -179,7 +179,7 @@ describe('ArticlesComponent', () => {
 
     component.handlePageEvent();
 
-    expect(component.articles).toEqual(okResponse.articles);
+    expect(component.articles()).toEqual(okResponse.articles);
     expect(spyOnScrollTo).toHaveBeenCalled();
   });
 });
