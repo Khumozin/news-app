@@ -8,10 +8,11 @@ describe('ArticleComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [ArticleComponent]
-});
+      imports: [ArticleComponent],
+    });
     fixture = TestBed.createComponent(ArticleComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
