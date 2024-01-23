@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 
@@ -27,6 +26,6 @@ import { RouterOutlet } from '@angular/router';
     `,
   ],
   standalone: true,
-  imports: [MatToolbarModule, MatSnackBarModule, RouterOutlet],
+  imports: [MatToolbarModule, RouterOutlet],
 })
 export class AppComponent {}

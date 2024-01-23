@@ -29,8 +29,9 @@
                 <mat-label>Sort</mat-label>
                 <mat-select formControlName="sortBy"
                             data-cy="form-input-sort">
-                    <mat-option *ngFor="let sortByOption of sortByOptions"
-                                [value]="sortByOption">{{ sortByOption | titlecase }}</mat-option>
+                    @for (sortByOption of sortByOptions; track $index) {
+                    <mat-option [value]="sortByOption">{{ sortByOption | titlecase }}</mat-option>
+                    }
                 </mat-select>
             </mat-form-field>
         </div>
@@ -45,19 +46,19 @@
     </div>
 
     <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mt-5 px-4">
-        <ng-container *skeleton="isLoading; repeat: 3; height: '320px';">
-            <ng-container *ngFor="let article of articles">
-                <article [article]="article"></article>
-            </ng-container>
+        <ng-container *skeleton="isLoading(); repeat: 3; height: '320px';">
+            @for (article of articles(); track $index) {
+            <article [article]="article"></article>
+            }
         </ng-container>
     </div>
 
     <div class="w-full h-40 flex items-center justify-center">
         <mat-paginator #paginator
                        (page)="handlePageEvent()"
-                       [length]="totalItems"
-                       [pageSize]="pageSize"
-                       [pageSizeOptions]="true ? pageSizeOptions : []"
+                       [length]="totalItems()"
+                       [pageSize]="pageSize()"
+                       [pageSizeOptions]="pageSizeOptions"
                        aria-label="Select page">
         </mat-paginator>
     </div>

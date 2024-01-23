@@ -1,14 +1,13 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'skeleton-rect',
-    // eslint-disable-next-line @angular-eslint/no-host-metadata-property
-    host: {
-        class: 'pulse',
-    },
-    template: ``,
-    styles: [
-        `
+  selector: 'skeleton-rect',
+  host: {
+    class: 'pulse',
+  },
+  template: ``,
+  styles: [
+    `
       :host {
         display: block;
         width: var(--skeleton-rect-width);
@@ -16,15 +15,15 @@ import { Component, ElementRef, OnInit } from '@angular/core';
         background: rgb(239, 241, 246) no-repeat;
       }
     `,
-    ],
-    standalone: true,
+  ],
+  standalone: true,
 })
 export class SkeletonRectComponent implements OnInit {
+  private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
+
   width!: string;
   height!: string;
   className!: string;
-
-  constructor(private host: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
     const host = this.host.nativeElement;
