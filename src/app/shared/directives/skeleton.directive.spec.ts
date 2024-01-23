@@ -1,24 +1,23 @@
-import { Component, TemplateRef, ViewContainerRef } from '@angular/core';
+import { Component, signal, TemplateRef, ViewContainerRef } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { SkeletonDirective } from './skeleton.directive';
 
 @Component({
   template: `<div
-    *skeleton="isLoading; repeat: 3; width: 'rand'; className: 'rounded-sm'"
+    *skeleton="isLoading(); repeat: 3; width: 'rand'; className: 'rounded-sm'"
   ></div>`,
   standalone: true,
   imports: [SkeletonDirective],
 })
 class TestComponent {
-  isLoading = true;
+  isLoading = signal<boolean>(true);
 }
 
 describe('SkeletonDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   let vcr: ViewContainerRef;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tr: TemplateRef<any>;
 
   beforeEach(() => {
@@ -37,8 +36,11 @@ describe('SkeletonDirective', () => {
   });
 
   it('should create an instance', () => {
-    const directive = new SkeletonDirective(tr, vcr);
-    expect(directive).toBeTruthy();
+    // fixes effect(() => ...) issue
+    TestBed.runInInjectionContext(() => {
+      const directive = new SkeletonDirective(tr, vcr);
+      expect(directive).toBeTruthy();
+    });
   });
 
   it('should create component', () => {
@@ -50,7 +52,6 @@ describe('SkeletonDirective - Negative Tests', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
   let vcr: ViewContainerRef;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let tr: TemplateRef<any>;
 
   beforeEach(() => {
@@ -81,11 +82,11 @@ describe('SkeletonDirective - Negative Tests', () => {
   });
 
   it('should call something', fakeAsync(() => {
-    component.isLoading = true;
+    component.isLoading.set(true);
 
     fixture.detectChanges();
 
-    component.isLoading = false;
+    component.isLoading.set(false);
 
     fixture.detectChanges();
 

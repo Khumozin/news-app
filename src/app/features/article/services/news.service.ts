@@ -7,13 +7,10 @@ import { Article, NewsApiOkResponse, SearchParam } from '../models';
 
 function buildParams(searchParams: SearchParam) {
   let params = new HttpParams();
-  const paramNames = Object.keys(searchParams);
+  const keys = Object.keys(searchParams);
 
-  paramNames.forEach((param, index) => {
-    params =
-      index === 0
-        ? params.set(param, searchParams[param as keyof SearchParam])
-        : params.append(param, searchParams[param as keyof SearchParam]);
+  keys.forEach((param) => {
+    params = params.append(param, searchParams[param as keyof SearchParam]);
   });
 
   return params;
@@ -31,6 +28,6 @@ export class NewsService {
   ): Observable<NewsApiOkResponse<Article>> {
     const params = buildParams(searchParams);
 
-    return this.http.get<NewsApiOkResponse<Article>>(`${this.url}`, { params });
+    return this.http.get<NewsApiOkResponse<Article>>(this.url, { params });
   }
 }

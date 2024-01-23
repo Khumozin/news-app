@@ -1,27 +1,17 @@
-import { HTTP_INTERCEPTORS, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Injectable, Provider } from '@angular/core';
+import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment.development';
 
-@Injectable()
-export class NetworkInterceptor implements HttpInterceptor {
-  private readonly apiKey = environment.apiKey;
+export function networkInterceptor(
+  request: HttpRequest<unknown>,
+  next: HttpHandlerFn
+): Observable<HttpEvent<unknown>> {
+  const apiKey = environment.apiKey;
 
-  intercept(
-    request: HttpRequest<unknown>,
-    next: HttpHandler
-  ): Observable<HttpEvent<unknown>> {
-    const modifiedRequest = request.clone({
-      params: request.params.append('apiKey', this.apiKey),
-    });
+  const modifiedRequest = request.clone({
+    params: request.params.append('apiKey', apiKey),
+  });
 
-    return next.handle(modifiedRequest);
-  }
+  return next(modifiedRequest);
 }
-
-export const provideNetworkInterceptor: Provider = {
-  provide: HTTP_INTERCEPTORS,
-  useClass: NetworkInterceptor,
-  multi: true,
-};
