@@ -6,7 +6,6 @@ import { Article } from '../../models';
 @Component({
   selector: 'article',
   templateUrl: './article.component.html',
-  styleUrls: ['./article.component.scss'],
   standalone: true,
   imports: [DatePipe],
 })
