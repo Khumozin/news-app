@@ -6,7 +6,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-root',
   template: `
     <mat-toolbar class="shadow-xl">
-      <span>News App</span>
+      <span class="text-4xl">News App</span>
     </mat-toolbar>
 
     <router-outlet></router-outlet>
@@ -15,13 +15,8 @@ import { RouterOutlet } from '@angular/router';
     `
       mat-toolbar {
         height: 120px;
-
         display: flex;
         justify-content: center;
-
-        span {
-          font-size: 36px;
-        }
       }
     `,
   ],
