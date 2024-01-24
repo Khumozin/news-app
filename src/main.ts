@@ -1,7 +1,6 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
@@ -10,8 +9,7 @@ import { networkInterceptor } from './app/core/interceptors';
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom([BrowserAnimationsModule]),
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideHttpClient(withInterceptors([networkInterceptor])),
     provideRouter(APP_ROUTES),
   ],

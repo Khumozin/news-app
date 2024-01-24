@@ -89,8 +89,8 @@ export class ArticlesComponent {
     const { q, from, sortBy } = this.form.value;
 
     return {
-      q: encodeURI(q as string),
-      from: this.datePipe.transform(from, 'yyyy-MM-dd') as string,
+      q: encodeURI(q!),
+      from: this.datePipe.transform(from, 'yyyy-MM-dd'),
       sortBy,
       pageSize: this.paginator.pageSize,
       page: this.paginator.pageIndex + 1,

@@ -48,6 +48,18 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #e0e0e0;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #616161;
+}
+
 .pulse {
   animation: pulse 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   animation-delay: 0.5s;
