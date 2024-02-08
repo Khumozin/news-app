@@ -9,7 +9,7 @@ import { RouterOutlet } from '@angular/router';
       <span class="text-4xl">News App</span>
     </mat-toolbar>
 
-    <router-outlet></router-outlet>
+    <router-outlet />
   `,
   styles: [
     `

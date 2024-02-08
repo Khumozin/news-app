@@ -5,8 +5,12 @@ import { SkeletonDirective } from './skeleton.directive';
 
 @Component({
   template: `<div
-    *skeleton="isLoading(); repeat: 3; width: 'rand'; className: 'rounded-sm'"
-  ></div>`,
+      *skeleton="isLoading(); repeat: 3; width: 'rand'; className: 'rounded-sm'"
+    ></div>
+
+    <div
+      *skeleton="isLoading(); repeat: 3; className: 'rounded-sm'"
+    ></div>`,
   standalone: true,
   imports: [SkeletonDirective],
 })
