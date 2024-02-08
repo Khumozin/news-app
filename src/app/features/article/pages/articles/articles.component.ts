@@ -48,17 +48,17 @@ export class ArticlesComponent {
   private readonly destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
 
+  protected readonly pageSizeOptions = [5, 10, 25];
+
+  protected readonly sortByOptions = Object.keys(SortBy).filter((item) =>
+    isNaN(Number.parseInt(item))
+  );
+
   articles = signal<Array<Article>>([]);
   isLoading = signal<boolean>(false);
   totalItems = signal<number>(0);
   pageSize = signal<number>(10);
   pageIndex = signal<number>(0);
-
-  pageSizeOptions = [5, 10, 25];
-
-  sortByOptions = Object.keys(SortBy).filter((item) =>
-    isNaN(Number.parseInt(item))
-  );
 
   form = new FormGroup({
     q: new FormControl<string>('', [Validators.required]),
@@ -116,6 +116,7 @@ export class ArticlesComponent {
         next: (results) => {
           if (results instanceof HttpErrorResponse) {
             this.openSnackBar((results.error as NewsApiErrorResponse).message);
+
             return;
           }
 
