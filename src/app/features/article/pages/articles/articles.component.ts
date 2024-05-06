@@ -1,6 +1,6 @@
 import { DatePipe, DOCUMENT, TitleCasePipe } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, DestroyRef, Inject, inject, signal, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -47,6 +47,7 @@ export class ArticlesComponent {
   private readonly datePipe = inject(DatePipe);
   private readonly destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
+  private readonly document = inject(DOCUMENT);
 
   protected readonly pageSizeOptions = [5, 10, 25];
 
@@ -54,11 +55,11 @@ export class ArticlesComponent {
     isNaN(Number.parseInt(item))
   );
 
-  articles = signal<Array<Article>>([]);
-  isLoading = signal<boolean>(false);
-  totalItems = signal<number>(0);
-  pageSize = signal<number>(10);
-  pageIndex = signal<number>(0);
+  articles = signal<Article[]>([]);
+  isLoading = signal(false);
+  totalItems = signal(0);
+  pageSize = signal(10);
+  pageIndex = signal(0);
 
   form = new FormGroup({
     q: new FormControl<string>('', [Validators.required]),
@@ -67,8 +68,6 @@ export class ArticlesComponent {
   });
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
   onSearch(): void {
     const query = this.buildQuery();
