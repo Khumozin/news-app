@@ -10,5 +10,5 @@ import { Article } from '../../models';
   imports: [DatePipe],
 })
 export class ArticleComponent {
-  article = input<Article>();
+  article = input.required<Article>();
 }

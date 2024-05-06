@@ -18,6 +18,7 @@ export class SkeletonDirective {
   className = input<string>('', { alias: 'skeletonClassName' });
 
   constructor(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private templateRef: TemplateRef<any>,
     private viewContainerRef: ViewContainerRef
   ) {
