@@ -1,9 +1,10 @@
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { finalize } from 'rxjs';
 import { Article, NewsApiOkResponse, SearchParam } from 'src/app/features/article/models';
 
 import { NewsService } from './news.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NewsService', () => {
   let service: NewsService;
@@ -11,9 +12,9 @@ describe('NewsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [],
-      imports: [HttpClientTestingModule],
-    });
+    imports: [],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
 
     service = TestBed.inject(NewsService);
     httpController = TestBed.inject(HttpTestingController);
