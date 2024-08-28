@@ -1,4 +1,4 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,13 +12,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { NewsService } from './features/article/services';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-    imports: [
-        RouterTestingModule,
-        HttpClientTestingModule,
+    imports: [RouterTestingModule,
         MatPaginatorModule,
         MatToolbarModule,
         MatFormFieldModule,
@@ -27,9 +26,8 @@ describe('AppComponent', () => {
         MatButtonModule,
         MatNativeDateModule,
         ReactiveFormsModule,
-        AppComponent
-    ],
-    providers: [NewsService],
+        AppComponent],
+    providers: [NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
 })
   );
 
