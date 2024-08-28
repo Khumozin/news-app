@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpErrorResponse, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DestroyRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -27,9 +27,7 @@ describe('ArticlesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        HttpClientTestingModule,
-        MatInputModule,
+    imports: [MatInputModule,
         MatFormFieldModule,
         MatSelectModule,
         MatDatepickerModule,
@@ -39,10 +37,9 @@ describe('ArticlesComponent', () => {
         NoopAnimationsModule,
         ArticlesComponent,
         SkeletonDirective,
-        MatSnackBarModule,
-      ],
-      providers: [NewsService, DatePipe, DestroyRef],
-    });
+        MatSnackBarModule],
+    providers: [NewsService, DatePipe, DestroyRef, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+});
     fixture = TestBed.createComponent(ArticlesComponent);
     component = fixture.componentInstance;
 
