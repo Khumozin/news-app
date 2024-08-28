@@ -2,12 +2,12 @@
 
 @include mat.core();
 
-$news-app-primary: mat.define-palette(mat.$indigo-palette);
-$news-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$news-app-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$news-app-accent: mat.m2-define-palette(mat.$m2-pink-palette, A200, A100, A400);
 
-$news-app-warn: mat.define-palette(mat.$red-palette);
+$news-app-warn: mat.m2-define-palette(mat.$m2-red-palette);
 
-$news-app-theme: mat.define-light-theme(
+$news-app-theme: mat.m2-define-light-theme(
   (
     color: (
       primary: $news-app-primary,
