@@ -1,5 +1,4 @@
 import { DatePipe, DOCUMENT, TitleCasePipe } from '@angular/common';
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, DestroyRef, inject, signal, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,12 +10,12 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { catchError, finalize, map, of } from 'rxjs';
+import { filter, finalize, map } from 'rxjs';
 
 import { SkeletonDirective } from '../../../../shared/directives';
 import { ArticleComponent } from '../../components';
 import { SortBy } from '../../enums';
-import { Article, NewsApiErrorResponse, SearchParam } from '../../models';
+import { Article, NewsApiResponse, SearchParam } from '../../models';
 import { NewsService } from '../../services';
 
 @Component({
@@ -102,24 +101,25 @@ export class ArticlesComponent {
     this.newsService
       .getArticles(query)
       .pipe(
+        filter((response) => response.status === 'ok'),
         map((response) => {
           this.totalItems.set(response.totalResults);
 
           return response.articles;
         }),
-        takeUntilDestroyed(this.destroyRef),
         finalize(() => this.isLoading.set(false)),
-        catchError((e) => of(e))
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
         next: (results) => {
-          if (results instanceof HttpErrorResponse) {
-            this.openSnackBar((results.error as NewsApiErrorResponse).message);
-
-            return;
-          }
-
           this.articles.set(results);
+        },
+        error: (e) => {
+          const error = e.error as NewsApiResponse;
+
+          if (error.status === 'error') {
+            this.openSnackBar(error.message);
+          }
         },
       });
   }
