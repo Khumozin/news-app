@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../../environments/environment.development';
-import { Article, NewsApiOkResponse, SearchParam } from '../models';
+import { Article, NewsApiResponse, SearchParam } from '../models';
 
 function buildParams(searchParams: SearchParam) {
   let params = new HttpParams();
@@ -25,9 +25,9 @@ export class NewsService {
 
   getArticles(
     searchParams: SearchParam
-  ): Observable<NewsApiOkResponse<Article>> {
+  ): Observable<NewsApiResponse<Article[]>> {
     const params = buildParams(searchParams);
 
-    return this.http.get<NewsApiOkResponse<Article>>(this.url, { params });
+    return this.http.get<NewsApiResponse<Article[]>>(this.url, { params });
   }
 }

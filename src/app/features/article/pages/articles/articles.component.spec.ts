@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
-import { Article, NewsApiErrorResponse, NewsApiOkResponse } from 'src/app/features/article/models';
+import { Article, NewsApiErrorResponse, NewsApiResponse } from 'src/app/features/article/models';
 import { NewsService } from 'src/app/features/article/services';
 import { SkeletonDirective } from 'src/app/shared/directives';
 
@@ -76,7 +76,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should get articles when getArticles is called', () => {
-    const okResponse: NewsApiOkResponse<Article> = {
+    const okResponse: NewsApiResponse<Article[]> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
@@ -133,7 +133,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should get articles when onSearch is called', () => {
-    const okResponse: NewsApiOkResponse<Article> = {
+    const okResponse: NewsApiResponse<Article[]> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
@@ -156,7 +156,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should get articles when handlePageEvent is called', () => {
-    const okResponse: NewsApiOkResponse<Article> = {
+    const okResponse: NewsApiResponse<Article[]> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
