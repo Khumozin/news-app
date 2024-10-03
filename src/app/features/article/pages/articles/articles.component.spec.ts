@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
-import { Article, NewsApiErrorResponse, NewsApiResponse } from 'src/app/features/article/models';
+import { Article, NewsApiResponse } from 'src/app/features/article/models';
 import { NewsService } from 'src/app/features/article/services';
 import { SkeletonDirective } from 'src/app/shared/directives';
 
@@ -119,10 +119,10 @@ describe('ArticlesComponent', () => {
         () =>
           new HttpErrorResponse({
             error: {
-              code: '400',
+              code: 400,
               message: 'Failed',
               status: 'error',
-            } as NewsApiErrorResponse,
+            } satisfies NewsApiResponse,
           })
       )
     );
