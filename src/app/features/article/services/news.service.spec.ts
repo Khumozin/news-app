@@ -1,10 +1,10 @@
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { finalize } from 'rxjs';
-import { Article, NewsApiOkResponse, SearchParam } from 'src/app/features/article/models';
+import { Article, NewsApiResponse, SearchParam } from 'src/app/features/article/models';
 
 import { NewsService } from './news.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('NewsService', () => {
   let service: NewsService;
@@ -29,7 +29,7 @@ describe('NewsService', () => {
   });
 
   it('should return an observable of articles when getArticles is called', (done) => {
-    const mock: NewsApiOkResponse<Article> = {
+    const mock: NewsApiResponse<Article[]> = {
       articles: [],
       status: 'ok',
       totalResults: 0,
