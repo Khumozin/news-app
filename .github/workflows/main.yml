@@ -45,12 +45,23 @@ jobs:
     #   - name: Run npm audit
     #     run: npm audit --audit-level=high
 
+  secret-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   unit-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [20.x]
-    needs: [build, dependency-analysis]
+    needs: [build, dependency-analysis, secret-scan]
     steps:
       - uses: actions/checkout@v3.3.0
       - name: Use Node.js ${{ matrix.node-version }}
@@ -66,7 +77,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-    needs: [build, dependency-analysis]
+    needs: [build, dependency-analysis, secret-scan]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
