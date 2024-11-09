@@ -16,39 +16,64 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - run: npm ci
       - run: npm run lint
 
   build:
-     runs-on: ubuntu-latest
-     strategy:
-      matrix:
-        node-version: [20.x]
-     needs: [ lint ]
-     steps:
-       - uses: actions/checkout@v3.3.0
-       - name: Use Node.js ${{ matrix.node-version }}
-         uses: actions/setup-node@v3
-         with:
-           node-version: ${{ matrix.node-version }}
-           cache: 'npm'
-       - run: npm ci
-       - run: npm run build
-
-  unit-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         node-version: [20.x]
-    needs: [ build ]
+    needs: [lint]
     steps:
       - uses: actions/checkout@v3.3.0
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
+      - run: npm ci
+      - run: npm run build
+
+  dependency-analysis:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/node@master
+        continue-on-error: true # To make sure that SARIF upload gets called
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
+
+    #   - name: Run npm audit
+    #     run: npm audit --audit-level=high
+
+  unit-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
+    needs: [build, dependency-analysis]
+    steps:
+      - uses: actions/checkout@v3.3.0
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
       - run: npm ci
       - run: npm test -- --watch=false --browsers=ChromeHeadless
 
@@ -57,7 +82,7 @@ jobs:
     strategy:
       matrix:
         node-version: [20.x]
-    needs: [ build ]
+    needs: [build, dependency-analysis]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -66,7 +91,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: "npm"
       - run: npm ci
 
       - name: Cypress run
@@ -75,5 +100,5 @@ jobs:
           build: npm run build
           start: npm run start
           browser: chrome
-          wait-on: 'http://localhost:4200'
+          wait-on: "http://localhost:4200"
           wait-on-timeout: 180
