@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/Khumozin/news-app/compare/v2.0.0...v2.1.0) (2024-11-09)
+
+
+### Features
+
+* **main.yml:** add update-manifests job ([854a0b6](https://github.com/Khumozin/news-app/commit/854a0b640d06ddbfa0494d852d854b550d4718b1))
+
 # [2.0.0](https://github.com/Khumozin/news-app/compare/v1.1.2...v2.0.0) (2024-01-22)
 
 
