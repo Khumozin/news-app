@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/Khumozin/news-app/compare/v2.1.0...v2.1.1) (2024-11-09)
+
+
+### Bug Fixes
+
+* **workflows:** fix checkout gitops repo ([73839a7](https://github.com/Khumozin/news-app/commit/73839a7f4b1b7338a86dddd6846aa52a3d1d3b56))
+
 # [2.1.0](https://github.com/Khumozin/news-app/compare/v2.0.0...v2.1.0) (2024-11-09)
 
 
