@@ -200,7 +200,7 @@ jobs:
         with:
           repository: khumozin/news-app-gitops
           ref: main
-          token: ${{ secrets.DEVSECOPSAPP_PAT }}
+          token: ${{ secrets.NEWSAPP_PAT }}
 
       - name: GitOps - Update Deployment Manifest
         run: |
