@@ -144,7 +144,7 @@ jobs:
   image-build:
     needs: [semantic-release]
     if: ${{ needs.semantic-release.outputs.pkg-version != needs.semantic-release.outputs.prev-pkg-version }}
-    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@main
+    uses: khumozin/workflow-templates/.github/workflows/docker-build-and-publish.yml@main
     with:
         image_name: my-app
         tag: ${{ needs.semantic-release.outputs.pkg-version }}
