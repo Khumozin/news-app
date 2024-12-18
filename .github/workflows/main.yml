@@ -46,20 +46,9 @@ jobs:
     #     run: npm audit --audit-level=high
 
   secret-scan:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # fetch all history so multiple commits can be scanned
-      - name: GitGuardian scan
-        uses: GitGuardian/ggshield/actions/secret@v1.33.0
-        env:
-          GITHUB_PUSH_BEFORE_SHA: ${{ github.event.before }}
-          GITHUB_PUSH_BASE_SHA: ${{ github.event.base }}
-          GITHUB_PULL_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-          GITHUB_DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.1.0
+    secrets:
+      gitguardian_api_key: ${{ secrets.GITGUARDIAN_API_KEY }}
 
   unit-test:
     runs-on: ubuntu-latest
