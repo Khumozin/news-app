@@ -1,3 +1,10 @@
+## [2.1.4](https://github.com/Khumozin/news-app/compare/v2.1.3...v2.1.4) (2024-12-18)
+
+
+### Bug Fixes
+
+* call reusable workflows on main workflow ([264ed82](https://github.com/Khumozin/news-app/commit/264ed8254462c266078432674b5ffb5801861cae))
+
 ## [2.1.3](https://github.com/Khumozin/news-app/compare/v2.1.2...v2.1.3) (2024-12-18)
 
 
