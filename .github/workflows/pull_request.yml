@@ -6,22 +6,12 @@ on:
       - main
 jobs:
   lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
-    steps:
-      - uses: actions/checkout@v3.3.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - run: npm run lint
+    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.2.0
+    with:
+      node_version: 20.x
 
   secret-scan:
-    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.1.0
+    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.2.0
     secrets:
       gitguardian_api_key: ${{ secrets.GITGUARDIAN_API_KEY }}
 
@@ -51,59 +41,19 @@ jobs:
     #     run: npm audit --audit-level=high
 
   build:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
     needs: [lint, secret-scan, dependency-analysis]
-    steps:
-      - uses: actions/checkout@v3.3.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - run: npm run build
+    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.2.0
+    with:
+      node_version: 20.x
 
   unit-test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
     needs: [build]
-    steps:
-      - uses: actions/checkout@v3.3.0
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-      - run: npm test -- --watch=false --browsers=ChromeHeadless
+    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.2.0
+    with:
+      node_version: 20.x
 
   e2e-test:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [20.x]
     needs: [build]
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-      - run: npm ci
-
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm run start
-          browser: chrome
-          wait-on: "http://localhost:4200"
-          wait-on-timeout: 180
+    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.2.0
+    with:
+      node_version: 20.x
