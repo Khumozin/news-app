@@ -1,3 +1,11 @@
+## [2.1.3](https://github.com/Khumozin/news-app/compare/v2.1.2...v2.1.3) (2024-12-18)
+
+
+### Bug Fixes
+
+* call reusable docker workflow ([82c7365](https://github.com/Khumozin/news-app/commit/82c7365756554ba60c9cf63ca88692cf294167ad))
+* call the correct image-build workflow ([09150dc](https://github.com/Khumozin/news-app/commit/09150dc0b9a2add2d754b77f209c279dcb907179))
+
 ## [2.1.2](https://github.com/Khumozin/news-app/compare/v2.1.1...v2.1.2) (2024-11-09)
 
 
