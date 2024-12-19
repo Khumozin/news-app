@@ -1,3 +1,17 @@
+# [2.3.0](https://github.com/Khumozin/news-app/compare/v2.2.2...v2.3.0) (2024-12-19)
+
+
+### Bug Fixes
+
+* use latest sca workflow ([2b3b7ee](https://github.com/Khumozin/news-app/commit/2b3b7ee63e4047340c5b354e75728c17cfa91be8))
+* use most recent sca workflow ([7667d79](https://github.com/Khumozin/news-app/commit/7667d790dd3b678f0387b8f63ff4598b4f6be75c))
+* use sca ([ad2701f](https://github.com/Khumozin/news-app/commit/ad2701fcc9d3795a15dc899470f879c5dfce4be0))
+
+
+### Features
+
+* add static-code-analysis to workflows ([c640410](https://github.com/Khumozin/news-app/commit/c6404102b6fe18bac7c0b04903aee7e87967852d))
+
 ## [2.2.2](https://github.com/Khumozin/news-app/compare/v2.2.1...v2.2.2) (2024-12-19)
 
 
