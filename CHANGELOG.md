@@ -1,3 +1,11 @@
+## [2.2.1](https://github.com/Khumozin/news-app/compare/v2.2.0...v2.2.1) (2024-12-19)
+
+
+### Bug Fixes
+
+* enhance pipeline ([98c2e5c](https://github.com/Khumozin/news-app/commit/98c2e5c0af2cd6be8db43b6b430d849afa4121a9))
+* update workflow versions ([b30f4f0](https://github.com/Khumozin/news-app/commit/b30f4f0721cdc1444a7340d63a5cb04a5731d739))
+
 # [2.2.0](https://github.com/Khumozin/news-app/compare/v2.1.4...v2.2.0) (2024-12-19)
 
 
