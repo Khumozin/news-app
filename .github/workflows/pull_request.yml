@@ -21,7 +21,7 @@ jobs:
     secrets: inherit
 
   sonar-cloud:
-    uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.5.1
+    uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@main
     with:
       project_base_directory: news-app
       source_folder: "src/"
