@@ -11,13 +11,13 @@ jobs:
       node_version: "['20.x']"
 
   snyk:
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.3.0
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.5.0
     with:
       node_version: "['20.x']"
     secrets: inherit
 
   sonar-cloud:
-    uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.5.1
+    uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.5.2
     with:
       project_base_directory: news-app
       source_folder: "src/"
