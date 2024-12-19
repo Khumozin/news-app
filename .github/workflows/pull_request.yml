@@ -6,17 +6,17 @@ on:
       - main
 jobs:
   lint:
-    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.2.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.4.0
     with:
       node_version: "['20.x']"
 
   secret-scan:
-    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.2.1
+    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.4.0
     secrets:
       gitguardian_api_key: ${{ secrets.GITGUARDIAN_API_KEY }}
 
   dependency-analysis:
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.3.0
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.4.0
     with:
       node_version: "['20.x']"
     secrets:
@@ -24,18 +24,18 @@ jobs:
 
   build:
     needs: [lint, secret-scan, dependency-analysis]
-    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.2.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.4.0
     with:
       node_version: "['20.x']"
 
   unit-test:
     needs: [build]
-    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.2.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.4.0
     with:
       node_version: "['20.x']"
 
   e2e-test:
     needs: [build]
-    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.2.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.4.0
     with:
       node_version: "['20.x']"
