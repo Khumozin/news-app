@@ -5,45 +5,52 @@ on:
     branches:
       - main
 jobs:
-  build:
-    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.4.2
+  angular:
+    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.5.0
     with:
       node_version: "['20.x']"
 
-  dependency-analysis:
+  snyk:
     uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.3.0
     with:
       node_version: "['20.x']"
     secrets: inherit
 
-  secret-scan:
-    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.1.0
+  sonar-cloud:
+    uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.5.0
+    with:
+      project_base_directory: news-app
+      source_folder: "src/"
     secrets: inherit
 
-  unit-test:
-    needs: [build, dependency-analysis, secret-scan]
-    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.4.2
+  gitguardian:
+    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.5.0
+    secrets: inherit
+
+  jasmine:
+    needs: [angular, snyk, gitguardian]
+    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.5.0
     with:
       node_version: "['20.x']"
 
-  e2e-test:
-    needs: [build, dependency-analysis, secret-scan]
-    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.4.2
+  cypress:
+    needs: [angular, snyk, gitguardian]
+    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.5.0
     with:
       node_version: "['20.x']"
 
   semantic-release:
-    needs: [unit-test, e2e-test]
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-semantic-release.yml@1.4.2
+    needs: [jasmine, cypress]
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-semantic-release.yml@1.5.0
     with:
       node_version: "['20.x']"
     permissions:
       contents: write
 
-  image-build:
+  docker:
     needs: [semantic-release]
     if: ${{ needs.semantic-release.outputs.pkg-version != needs.semantic-release.outputs.prev-pkg-version }}
-    uses: khumozin/workflow-templates/.github/workflows/docker-build-and-publish.yml@1.4.2
+    uses: khumozin/workflow-templates/.github/workflows/docker-build-and-publish.yml@1.5.0
     with:
       image_name: news-app
       tag: ${{ needs.semantic-release.outputs.pkg-version }}
@@ -51,7 +58,7 @@ jobs:
 
   update-manifests:
     runs-on: ubuntu-latest
-    needs: [image-build, semantic-release]
+    needs: [docker, semantic-release]
     steps:
       - name: Checkout GitOps Repo
         uses: actions/checkout@v4
