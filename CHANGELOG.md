@@ -1,3 +1,10 @@
+## [2.2.2](https://github.com/Khumozin/news-app/compare/v2.2.1...v2.2.2) (2024-12-19)
+
+
+### Bug Fixes
+
+* update docker workflow ([a57b5c8](https://github.com/Khumozin/news-app/commit/a57b5c80c0bdab2546dc13a4e92ed5c918a00373))
+
 ## [2.2.1](https://github.com/Khumozin/news-app/compare/v2.2.0...v2.2.1) (2024-12-19)
 
 
