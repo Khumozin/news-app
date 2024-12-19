@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/Khumozin/news-app/compare/v2.1.4...v2.2.0) (2024-12-19)
+
+
+### Bug Fixes
+
+* add permissions for semantic release job ([3781b5e](https://github.com/Khumozin/news-app/commit/3781b5e9db4aef3ff43e2667ac0cb58b83f651d7))
+
+
+### Features
+
+* call reusable semantic-release workflow ([759a8d3](https://github.com/Khumozin/news-app/commit/759a8d3596575ee589719f02043c32a66afc67ad))
+
 ## [2.1.4](https://github.com/Khumozin/news-app/compare/v2.1.3...v2.1.4) (2024-12-18)
 
 
