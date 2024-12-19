@@ -12,15 +12,13 @@ jobs:
 
   secret-scan:
     uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.4.0
-    secrets:
-      gitguardian_api_key: ${{ secrets.GITGUARDIAN_API_KEY }}
+    secrets: inherit
 
   dependency-analysis:
     uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.4.0
     with:
       node_version: "['20.x']"
-    secrets:
-      snyk_token: ${{ secrets.SNYK_TOKEN }}
+    secrets: inherit
 
   build:
     needs: [lint, secret-scan, dependency-analysis]

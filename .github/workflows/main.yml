@@ -14,13 +14,11 @@ jobs:
     uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.3.0
     with:
       node_version: "['20.x']"
-    secrets:
-      snyk_token: ${{ secrets.SNYK_TOKEN }}
+    secrets: inherit
 
   secret-scan:
     uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.1.0
-    secrets:
-      gitguardian_api_key: ${{ secrets.GITGUARDIAN_API_KEY }}
+    secrets: inherit
 
   unit-test:
     needs: [build, dependency-analysis, secret-scan]
@@ -49,9 +47,7 @@ jobs:
     with:
       image_name: news-app
       tag: ${{ needs.semantic-release.outputs.pkg-version }}
-    secrets:
-      registry_username: ${{ secrets.DOCKER_USERNAME }}
-      registry_password: ${{ secrets.DOCKER_PASSWORD }}
+    secrets: inherit
 
   update-manifests:
     runs-on: ubuntu-latest
