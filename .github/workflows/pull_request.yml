@@ -6,34 +6,34 @@ on:
       - main
 jobs:
   lint:
-    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.4.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.4.2
     with:
       node_version: "['20.x']"
 
   secret-scan:
-    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.4.1
+    uses: khumozin/workflow-templates/.github/workflows/secret-scan.yml@1.4.2
     secrets: inherit
 
   dependency-analysis:
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.4.1
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.4.2
     with:
       node_version: "['20.x']"
     secrets: inherit
 
   build:
     needs: [lint, secret-scan, dependency-analysis]
-    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.4.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.4.2
     with:
       node_version: "['20.x']"
 
   unit-test:
     needs: [build]
-    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.4.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.4.2
     with:
       node_version: "['20.x']"
 
   e2e-test:
     needs: [build]
-    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.4.1
+    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.4.2
     with:
       node_version: "['20.x']"
