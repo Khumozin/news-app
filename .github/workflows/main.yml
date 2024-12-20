@@ -28,13 +28,13 @@ jobs:
     secrets: inherit
 
   jasmine:
-    needs: [angular, snyk, gitguardian]
+    needs: [angular, snyk, gitguardian, sonar-cloud]
     uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.5.0
     with:
       node_version: "['20.x']"
 
   cypress:
-    needs: [angular, snyk, gitguardian]
+    needs: [angular, snyk, gitguardian, sonar-cloud]
     uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.5.0
     with:
       node_version: "['20.x']"
