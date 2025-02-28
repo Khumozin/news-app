@@ -1,4 +1,4 @@
-@use "@angular/material" as mat;
+@use '@angular/material' as mat;
 
 @include mat.elevation-classes();
 @include mat.app-background();
@@ -13,8 +13,8 @@ $news-app-theme: mat.m2-define-light-theme(
     color: (
       primary: $news-app-primary,
       accent: $news-app-accent,
-      warn: $news-app-warn
-    )
+      warn: $news-app-warn,
+    ),
   )
 );
 
@@ -30,7 +30,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .pulse {

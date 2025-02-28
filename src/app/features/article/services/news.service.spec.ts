@@ -1,8 +1,18 @@
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { finalize } from 'rxjs';
-import { Article, NewsApiResponse, SearchParam } from 'src/app/features/article/models';
+import {
+  Article,
+  NewsApiResponse,
+  SearchParam,
+} from 'src/app/features/article/models';
 
 import { NewsService } from './news.service';
 
@@ -12,9 +22,12 @@ describe('NewsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-    imports: [],
-    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-});
+      imports: [],
+      providers: [
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    });
 
     service = TestBed.inject(NewsService);
     httpController = TestBed.inject(HttpTestingController);
@@ -28,7 +41,7 @@ describe('NewsService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an observable of articles when getArticles is called', (done) => {
+  it('should return an observable of articles when getArticles is called', done => {
     const mock: NewsApiResponse<Article[]> = {
       articles: [],
       status: 'ok',
@@ -47,7 +60,7 @@ describe('NewsService', () => {
       .getArticles(query)
       .pipe(finalize(done))
       .subscribe({
-        next: (res) => expect(res.status).toEqual('ok'),
+        next: res => expect(res.status).toEqual('ok'),
       });
 
     const req = httpController.expectOne(
