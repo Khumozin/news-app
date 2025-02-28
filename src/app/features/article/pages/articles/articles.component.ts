@@ -1,5 +1,5 @@
 import { DatePipe, DOCUMENT, TitleCasePipe } from '@angular/common';
-import { Component, DestroyRef, inject, signal, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, signal, viewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,30 +19,29 @@ import { Article, NewsApiResponse, SearchParam } from '../../models';
 import { NewsService } from '../../services';
 
 @Component({
-    selector: 'app-articles',
-    templateUrl: './articles.component.html',
-    styleUrls: ['./articles.component.scss'],
-    providers: [DatePipe],
-    imports: [
-        ReactiveFormsModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatDatepickerModule,
-        MatSelectModule,
-        MatOptionModule,
-        MatButtonModule,
-        ArticleComponent,
-        MatPaginatorModule,
-        TitleCasePipe,
-        SkeletonDirective,
-        MatSnackBarModule,
-        MatNativeDateModule,
-        DatePipe,
-    ]
+  selector: 'app-articles',
+  templateUrl: './articles.component.html',
+  styleUrls: ['./articles.component.scss'],
+  providers: [DatePipe],
+  imports: [
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatOptionModule,
+    MatButtonModule,
+    ArticleComponent,
+    MatPaginatorModule,
+    TitleCasePipe,
+    SkeletonDirective,
+    MatSnackBarModule,
+    MatNativeDateModule,
+
+  ],
 })
 export class ArticlesComponent {
   private readonly newsService = inject(NewsService);
-  private readonly datePipe = inject(DatePipe);
   private readonly destroyRef = inject(DestroyRef);
   private readonly snackBar = inject(MatSnackBar);
   private readonly document = inject(DOCUMENT);
@@ -65,7 +64,7 @@ export class ArticlesComponent {
     sortBy: new FormControl<keyof typeof SortBy>('relevancy'),
   });
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  paginator = viewChild.required(MatPaginator);
 
   onSearch(): void {
     const query = this.buildQuery();
@@ -87,10 +86,10 @@ export class ArticlesComponent {
 
     return {
       q: encodeURI(q!),
-      from: this.datePipe.transform(from, 'yyyy-MM-dd'),
+      from: new Date(from!).toISOString().split('T')[0],
       sortBy,
-      pageSize: this.paginator.pageSize,
-      page: this.paginator.pageIndex + 1,
+      pageSize: this.paginator().pageSize,
+      page: this.paginator().pageIndex + 1,
     } as SearchParam;
   }
 

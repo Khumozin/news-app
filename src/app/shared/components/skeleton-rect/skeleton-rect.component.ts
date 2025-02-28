@@ -16,10 +16,9 @@ import { Component, ElementRef, inject, OnInit } from '@angular/core';
       }
     `,
   ],
-  standalone: true,
 })
 export class SkeletonRectComponent implements OnInit {
-  private readonly host: ElementRef<HTMLElement> = inject(ElementRef);
+  private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);
 
   width!: string;
   height!: string;
