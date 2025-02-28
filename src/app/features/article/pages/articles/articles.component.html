@@ -1,64 +1,70 @@
-<form class="w-full flex-col mt-5"
-      [formGroup]="form">
-    <div class="w-full flex justify-center items-center">
-        <mat-form-field appearance="fill">
-            <mat-label>Keywords</mat-label>
-            <input matInput
-                   placeholder="Search..."
-                   formControlName="q"
-                   data-cy="form-input-query">
-        </mat-form-field>
+<form class="w-full flex-col mt-5" [formGroup]="form">
+  <div class="w-full flex justify-center items-center">
+    <mat-form-field appearance="fill">
+      <mat-label>Keywords</mat-label>
+      <input
+        matInput
+        placeholder="Search..."
+        formControlName="q"
+        data-cy="form-input-query" />
+    </mat-form-field>
 
-        <mat-form-field>
-            <mat-label>Choose a date</mat-label>
-            <input matInput
-                   [matDatepicker]="picker"
-                   formControlName="from"
-                   data-cy="form-input-date">
-            <mat-datepicker-toggle matIconSuffix
-                                   [for]="picker"
-                                   data-cy="form-input-date-toggle"></mat-datepicker-toggle>
-            <mat-datepicker #picker
-                            data-cy="form-input-date-picker"></mat-datepicker>
-        </mat-form-field>
-    </div>
+    <mat-form-field>
+      <mat-label>Choose a date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        formControlName="from"
+        data-cy="form-input-date" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+        data-cy="form-input-date-toggle"></mat-datepicker-toggle>
+      <mat-datepicker #picker data-cy="form-input-date-picker"></mat-datepicker>
+    </mat-form-field>
+  </div>
 
-    <div class="w-full flex justify-center items-center">
-        <mat-form-field>
-            <mat-label>Sort</mat-label>
-            <mat-select formControlName="sortBy"
-                        data-cy="form-input-sort">
-                @for (sortByOption of sortByOptions; track $index) {
-                <mat-option [value]="sortByOption">{{ sortByOption | titlecase }}</mat-option>
-                }
-            </mat-select>
-        </mat-form-field>
-    </div>
+  <div class="w-full flex justify-center items-center">
+    <mat-form-field>
+      <mat-label>Sort</mat-label>
+      <mat-select formControlName="sortBy" data-cy="form-input-sort">
+        @for (sortByOption of sortByOptions; track $index) {
+          <mat-option [value]="sortByOption">{{
+            sortByOption | titlecase
+          }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
 </form>
 
 <div class="w-full flex items-center justify-center">
-    <button mat-raised-button
-            color="primary"
-            (click)="onSearch()"
-            data-cy="form-submit-button">Search
-    </button>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="onSearch()"
+    data-cy="form-submit-button">
+    Search
+  </button>
 </div>
 
 <div class="w-full flex md:px-16 lg:px-24">
-    <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 px-4">
-        <ng-container *skeleton="isLoading(); repeat: 5; height: '320px';" />
+  <div
+    class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 px-4">
+    <ng-container *skeleton="isLoading(); repeat: 5; height: '320px'" />
 
-        @for (article of articles(); track $index) {
-        <article [article]="article"></article>
-        }
-    </div>
+    @for (article of articles(); track $index) {
+      <article [article]="article"></article>
+    }
+  </div>
 </div>
 
 <div class="w-full h-40 flex items-center justify-center">
-    <mat-paginator (page)="handlePageEvent()"
-                   [length]="totalItems()"
-                   [pageSize]="pageSize()"
-                   [pageSizeOptions]="pageSizeOptions"
-                   aria-label="Select page">
-    </mat-paginator>
+  <mat-paginator
+    (page)="handlePageEvent()"
+    [length]="totalItems()"
+    [pageSize]="pageSize()"
+    [pageSizeOptions]="pageSizeOptions"
+    aria-label="Select page">
+  </mat-paginator>
 </div>

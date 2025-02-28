@@ -57,4 +57,3 @@ export class ArticleMock {
     return this._data;
   }
 }
-
