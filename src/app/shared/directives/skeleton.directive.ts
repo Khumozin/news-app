@@ -8,7 +8,6 @@ function random(min: number, max: number): number {
 
 @Directive({
   selector: '[skeleton]',
-  standalone: true,
 })
 export class SkeletonDirective {
   isLoading = input<boolean>(false, { alias: 'skeleton' });
