@@ -5,17 +5,6 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment.development';
 import { Article, NewsApiResponse, SearchParam } from '../models';
 
-function buildParams(searchParams: SearchParam) {
-  let params = new HttpParams();
-  const keys = Object.keys(searchParams);
-
-  keys.forEach((param) => {
-    params = params.append(param, searchParams[param as keyof SearchParam]);
-  });
-
-  return params;
-}
-
 @Injectable({
   providedIn: 'root',
 })
@@ -26,7 +15,7 @@ export class NewsService {
   getArticles(
     searchParams: SearchParam
   ): Observable<NewsApiResponse<Article[]>> {
-    const params = buildParams(searchParams);
+    const params = new HttpParams({ fromObject: { ...searchParams } });
 
     return this.http.get<NewsApiResponse<Article[]>>(this.url, { params });
   }
