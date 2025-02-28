@@ -44,12 +44,14 @@
     </button>
 </div>
 
-<div class="w-full grid grid-cols-1 md:grid-cols-2 gap-8 mt-5 px-4">
-    <ng-container *skeleton="isLoading(); repeat: 3; height: '320px';">
+<div class="w-full flex md:px-16 lg:px-24">
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-5 px-4">
+        <ng-container *skeleton="isLoading(); repeat: 5; height: '320px';" />
+
         @for (article of articles(); track $index) {
         <article [article]="article"></article>
         }
-    </ng-container>
+    </div>
 </div>
 
 <div class="w-full h-40 flex items-center justify-center">
