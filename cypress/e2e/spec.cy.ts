@@ -186,7 +186,7 @@ describe('Test App', () => {
     const date = new Date();
     const day = date.getDate();
 
-    cy.intercept('GET', 'https://newsapi.org/v2/everything*', (req) => {
+    cy.intercept('GET', 'https://newsapi.org/v2/everything*', req => {
       req.reply({
         body: API_RESPONSE,
         delay: 75,

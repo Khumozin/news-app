@@ -1,0 +1,5 @@
+node prettier-hook.js
+
+ng lint --fix
+
+# ng test --no-watch --no-progress --browsers=ChromeHeadless

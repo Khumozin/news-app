@@ -12,12 +12,16 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 import { AppComponent } from './app.component';
 import { NewsService } from './features/article/services';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 describe('AppComponent', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-    imports: [RouterTestingModule,
+      imports: [
+        RouterTestingModule,
         MatPaginatorModule,
         MatToolbarModule,
         MatFormFieldModule,
@@ -26,9 +30,14 @@ describe('AppComponent', () => {
         MatButtonModule,
         MatNativeDateModule,
         ReactiveFormsModule,
-        AppComponent],
-    providers: [NewsService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-})
+        AppComponent,
+      ],
+      providers: [
+        NewsService,
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
+    })
   );
 
   it('should create the app', () => {

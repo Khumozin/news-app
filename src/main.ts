@@ -13,4 +13,4 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptors([networkInterceptor])),
     provideRouter(APP_ROUTES),
   ],
-}).catch((err) => console.error(err));
+}).catch(err => console.error(err));
