@@ -5,15 +5,14 @@ import { SkeletonDirective } from './skeleton.directive';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 @Component({
-  template: `<div
+    template: `<div
       *skeleton="isLoading(); repeat: 3; width: 'rand'; className: 'rounded-sm'"
     ></div>
 
     <div
       *skeleton="isLoading(); repeat: 3; className: 'rounded-sm'"
     ></div>`,
-  standalone: true,
-  imports: [SkeletonDirective],
+    imports: [SkeletonDirective]
 })
 class TestComponent {
   isLoading = signal<boolean>(true);
