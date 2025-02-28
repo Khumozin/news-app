@@ -19,27 +19,26 @@ import { Article, NewsApiResponse, SearchParam } from '../../models';
 import { NewsService } from '../../services';
 
 @Component({
-  selector: 'app-articles',
-  templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.scss'],
-  providers: [DatePipe],
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatButtonModule,
-    ArticleComponent,
-    MatPaginatorModule,
-    TitleCasePipe,
-    SkeletonDirective,
-    MatSnackBarModule,
-    MatNativeDateModule,
-    DatePipe,
-  ],
+    selector: 'app-articles',
+    templateUrl: './articles.component.html',
+    styleUrls: ['./articles.component.scss'],
+    providers: [DatePipe],
+    imports: [
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        MatSelectModule,
+        MatOptionModule,
+        MatButtonModule,
+        ArticleComponent,
+        MatPaginatorModule,
+        TitleCasePipe,
+        SkeletonDirective,
+        MatSnackBarModule,
+        MatNativeDateModule,
+        DatePipe,
+    ]
 })
 export class ArticlesComponent {
   private readonly newsService = inject(NewsService);
