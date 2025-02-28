@@ -1,18 +1,30 @@
-import { Component, signal, TemplateRef, ViewContainerRef } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+  Component,
+  signal,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
+import {
+  ComponentFixture,
+  fakeAsync,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 
 import { SkeletonDirective } from './skeleton.directive';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 @Component({
-    template: `<div
-      *skeleton="isLoading(); repeat: 3; width: 'rand'; className: 'rounded-sm'"
-    ></div>
+  template: `<div
+      *skeleton="
+        isLoading();
+        repeat: 3;
+        width: 'rand';
+        className: 'rounded-sm'
+      "></div>
 
-    <div
-      *skeleton="isLoading(); repeat: 3; className: 'rounded-sm'"
-    ></div>`,
-    imports: [SkeletonDirective]
+    <div *skeleton="isLoading(); repeat: 3; className: 'rounded-sm'"></div>`,
+  imports: [SkeletonDirective],
 })
 class TestComponent {
   isLoading = signal<boolean>(true);

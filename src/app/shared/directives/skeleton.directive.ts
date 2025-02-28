@@ -1,4 +1,10 @@
-import { Directive, effect, input, TemplateRef, ViewContainerRef } from '@angular/core';
+import {
+  Directive,
+  effect,
+  input,
+  TemplateRef,
+  ViewContainerRef,
+} from '@angular/core';
 
 import { SkeletonRectComponent } from '../components';
 

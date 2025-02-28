@@ -1,7 +1,18 @@
 import { DatePipe, DOCUMENT, TitleCasePipe } from '@angular/common';
-import { Component, DestroyRef, inject, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -37,7 +48,6 @@ import { NewsService } from '../../services';
     SkeletonDirective,
     MatSnackBarModule,
     MatNativeDateModule,
-
   ],
 })
 export class ArticlesComponent {
@@ -48,7 +58,7 @@ export class ArticlesComponent {
 
   protected readonly pageSizeOptions = [5, 10, 25];
 
-  protected readonly sortByOptions = Object.keys(SortBy).filter((item) =>
+  protected readonly sortByOptions = Object.keys(SortBy).filter(item =>
     isNaN(Number.parseInt(item))
   );
 
@@ -99,8 +109,8 @@ export class ArticlesComponent {
     this.newsService
       .getArticles(query)
       .pipe(
-        filter((response) => response.status === 'ok'),
-        map((response) => {
+        filter(response => response.status === 'ok'),
+        map(response => {
           this.totalItems.set(response.totalResults);
 
           return response.articles;
@@ -109,10 +119,10 @@ export class ArticlesComponent {
         takeUntilDestroyed(this.destroyRef)
       )
       .subscribe({
-        next: (results) => {
+        next: results => {
           this.articles.set(results);
         },
-        error: (e) => {
+        error: e => {
           const error = e.error as NewsApiResponse;
 
           if (error.status === 'error') {

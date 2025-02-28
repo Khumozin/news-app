@@ -3,23 +3,23 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-root',
-    template: `
+  selector: 'app-root',
+  template: `
     <mat-toolbar class="shadow-xl">
       <span class="text-4xl">News App</span>
     </mat-toolbar>
 
     <router-outlet />
   `,
-    styles: [
-        `
+  styles: [
+    `
       mat-toolbar {
         height: 120px;
         display: flex;
         justify-content: center;
       }
     `,
-    ],
-    imports: [MatToolbarModule, RouterOutlet]
+  ],
+  imports: [MatToolbarModule, RouterOutlet],
 })
 export class AppComponent {}
