@@ -67,8 +67,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator.pageSize = 10;
-    component.paginator.pageIndex = 0;
+    component.paginator().pageSize = 10;
+    component.paginator().pageIndex = 0;
 
     const query = component.buildQuery();
 
@@ -88,8 +88,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator.pageSize = 10;
-    component.paginator.pageIndex = 0;
+    component.paginator().pageSize = 10;
+    component.paginator().pageIndex = 0;
 
     const query = component.buildQuery();
 
@@ -109,8 +109,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator.pageSize = 10;
-    component.paginator.pageIndex = 0;
+    component.paginator().pageSize = 10;
+    component.paginator().pageIndex = 0;
 
     const query = component.buildQuery();
 
@@ -145,8 +145,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator.pageSize = 10;
-    component.paginator.pageIndex = 0;
+    component.paginator().pageSize = 10;
+    component.paginator().pageIndex = 0;
 
     spyOn(newsService, 'getArticles').and.returnValues(of(okResponse));
 
@@ -168,8 +168,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator.pageSize = 10;
-    component.paginator.pageIndex = 0;
+    component.paginator().pageSize = 10;
+    component.paginator().pageIndex = 0;
 
     spyOn(newsService, 'getArticles').and.returnValues(of(okResponse));
     const spyOnScrollTo = spyOn(window, 'scrollTo');
