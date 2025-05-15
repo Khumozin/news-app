@@ -18,5 +18,6 @@ module.exports = {
         "ticket",
       ],
     ],
+    'body-max-line-length': [0, 'always', Infinity]
   },
 };
