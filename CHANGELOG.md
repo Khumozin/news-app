@@ -1,3 +1,10 @@
+# [2.4.0](https://github.com/Khumozin/news-app/compare/v2.3.0...v2.4.0) (2025-05-15)
+
+
+### Features
+
+* implement dynamic config ([871836a](https://github.com/Khumozin/news-app/commit/871836a67faa860b536c8117f92c539a315531ef))
+
 # [2.3.0](https://github.com/Khumozin/news-app/compare/v2.2.2...v2.3.0) (2024-12-19)
 
 ### Bug Fixes
