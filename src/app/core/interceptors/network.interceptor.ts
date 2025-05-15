@@ -1,13 +1,17 @@
 import { HttpEvent, HttpHandlerFn, HttpRequest } from '@angular/common/http';
+import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { environment } from '../../../environments/environment.development';
+import { EnvironmentService } from '../config/environment.service';
 
 export function networkInterceptor(
   request: HttpRequest<unknown>,
   next: HttpHandlerFn
 ): Observable<HttpEvent<unknown>> {
-  const apiKey = environment.apiKey;
+  const environmentService = inject(EnvironmentService);
+  const apiKey = environmentService.get('APP_API_KEY');
+
+  if (!apiKey) return next(request);
 
   const modifiedRequest = request.clone({
     params: request.params.append('apiKey', apiKey),
