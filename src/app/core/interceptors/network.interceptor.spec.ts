@@ -9,13 +9,21 @@ import {
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
+import { firstValueFrom, of } from 'rxjs';
 
-import { environment } from '../../../environments/environment.development';
+import { Environment } from '../config/environment.interface';
+import { EnvironmentService } from '../config/environment.service';
 import { networkInterceptor } from './network.interceptor';
+
+const environmentMock = {
+  APP_API_URL: 'https://api.test.dev',
+  APP_API_KEY: 'APIKEY',
+};
 
 describe('NetworkInterceptor', () => {
   let httpController: HttpTestingController;
   let http: HttpClient;
+  let env: EnvironmentService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,11 +31,21 @@ describe('NetworkInterceptor', () => {
       providers: [
         provideHttpClient(withInterceptors([networkInterceptor])),
         provideHttpClientTesting(),
+        {
+          provide: EnvironmentService,
+          useValue: {
+            load: () => firstValueFrom(of(environmentMock)),
+            get: (key: keyof Environment) => environmentMock[key],
+          },
+        },
       ],
     });
 
     http = TestBed.inject(HttpClient);
     httpController = TestBed.inject(HttpTestingController);
+    env = TestBed.inject(EnvironmentService);
+
+    env.load().then();
   });
 
   afterEach(() => {
@@ -42,8 +60,8 @@ describe('NetworkInterceptor', () => {
   });
 
   it('should add the API key as a query parameter', () => {
-    const apiKey = environment.apiKey;
-    const testUrl = environment.newApiUrl;
+    const apiKey = env.get('APP_API_KEY')!;
+    const testUrl = env.get('APP_API_URL')!;
     const expectedUrl = `${testUrl}?apiKey=${apiKey}`;
 
     http.get(testUrl).subscribe();
