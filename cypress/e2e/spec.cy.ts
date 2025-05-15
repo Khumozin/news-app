@@ -199,6 +199,8 @@ describe('Test App', () => {
 
     cy.get('[data-cy="form-input-date-toggle"]').click();
 
+    cy.wait(50); // wait for datepicker to be rendered before clicking on it
+
     cy.get('span')
       .contains('.mat-calendar-body-cell-content', `${day}`)
       .click();
