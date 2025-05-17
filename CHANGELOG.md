@@ -1,3 +1,10 @@
+## [2.4.2](https://github.com/Khumozin/news-app/compare/v2.4.1...v2.4.2) (2025-05-17)
+
+
+### Bug Fixes
+
+* reomve CMD nginx ([2fc9b25](https://github.com/Khumozin/news-app/commit/2fc9b253da5c3962f0212f5772c73dafa9da60e4))
+
 ## [2.4.1](https://github.com/Khumozin/news-app/compare/v2.4.0...v2.4.1) (2025-05-17)
 
 
