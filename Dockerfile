@@ -29,4 +29,4 @@ EXPOSE 80
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # The Chainguard nginx image already runs nginx by default — no need to specify CMD.
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
