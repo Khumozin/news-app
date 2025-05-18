@@ -13,20 +13,20 @@ COPY . .
 
 RUN npm run build
 
-#STAGE 2: RUN
-# FROM nginx:alpine
-FROM cgr.dev/chainguard/nginx:latest
+
+# STAGE 2: RUN
+FROM nginx:alpine
+# FROM cgr.dev/chainguard/nginx:latest-dev
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /usr/src/app/dist/news-app/browser /usr/share/nginx/html
 
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x docker-entrypoint.sh
 
 EXPOSE 80
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # The Chainguard nginx image already runs nginx by default — no need to specify CMD.
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
