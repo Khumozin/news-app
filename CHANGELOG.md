@@ -1,3 +1,10 @@
+## [2.5.1](https://github.com/Khumozin/news-app/compare/v2.5.0...v2.5.1) (2025-05-18)
+
+
+### Bug Fixes
+
+* use nginx chainguard image ([87ea7c3](https://github.com/Khumozin/news-app/commit/87ea7c3cceb89d38920e7ccf1c2075ca268612d7))
+
 # [2.5.0](https://github.com/Khumozin/news-app/compare/v2.4.2...v2.5.0) (2025-05-18)
 
 
