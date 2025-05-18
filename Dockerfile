@@ -13,16 +13,18 @@ COPY . .
 
 RUN npm run build
 
+RUN chmod +x docker-entrypoint.sh
 
 # STAGE 2: RUN
-FROM nginx:alpine
-# FROM cgr.dev/chainguard/nginx:latest-dev
+# FROM nginx:alpine
+FROM cgr.dev/chainguard/nginx:latest-dev
+
+USER root
 
 COPY ./nginx.conf /etc/nginx/conf.d/default.conf
 
 COPY --from=build /usr/src/app/dist/news-app/browser /usr/share/nginx/html
-
-RUN chmod +x docker-entrypoint.sh
+COPY --from=build /usr/src/app/docker-entrypoint.sh /docker-entrypoint.sh
 
 EXPOSE 80
 
