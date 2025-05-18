@@ -61,3 +61,20 @@ body {
     opacity: 1;
   }
 }
+
+.snackbar-success,
+.snackbar-error {
+  --mat-snack-bar-button-color: #fff;
+
+  .mat-mdc-snack-bar-action {
+    background-color: rgba(white, 0.2);
+  }
+}
+
+.snackbar-success {
+  --mdc-snackbar-container-color: #4caf50;
+}
+
+.snackbar-error {
+  --mdc-snackbar-container-color: #f44336;
+}
