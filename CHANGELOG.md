@@ -1,3 +1,15 @@
+# [2.5.0](https://github.com/Khumozin/news-app/compare/v2.4.2...v2.5.0) (2025-05-18)
+
+
+### Bug Fixes
+
+* remove chainguard from dockerfile ([73b096e](https://github.com/Khumozin/news-app/commit/73b096e96e9d857544e562e8ce6ccabadc63b954))
+
+
+### Features
+
+* add styles to snackbar ([d5e2a12](https://github.com/Khumozin/news-app/commit/d5e2a1263960724e82a5d2658c85461ded88efbf))
+
 ## [2.4.2](https://github.com/Khumozin/news-app/compare/v2.4.1...v2.4.2) (2025-05-17)
 
 
