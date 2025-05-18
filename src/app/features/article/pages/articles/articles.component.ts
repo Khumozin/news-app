@@ -133,8 +133,9 @@ export class ArticlesComponent {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, undefined, {
+    this.snackBar.open(message, 'Dismiss', {
       duration: 5000,
+      panelClass: ['snackbar-error'],
     });
   }
 }
