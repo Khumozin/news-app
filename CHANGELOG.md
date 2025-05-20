@@ -1,3 +1,10 @@
+## [2.5.4](https://github.com/Khumozin/news-app/compare/v2.5.3...v2.5.4) (2025-05-20)
+
+
+### Bug Fixes
+
+* remove quotes from image tag ([f34adc6](https://github.com/Khumozin/news-app/commit/f34adc66639a78c7ce43f07a4b0f672c46c19549))
+
 ## [2.5.3](https://github.com/Khumozin/news-app/compare/v2.5.2...v2.5.3) (2025-05-20)
 
 
