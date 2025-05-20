@@ -1,3 +1,10 @@
+## [2.5.5](https://github.com/Khumozin/news-app/compare/v2.5.4...v2.5.5) (2025-05-20)
+
+
+### Bug Fixes
+
+* use latest docker build (1..8.2) ([1aa8203](https://github.com/Khumozin/news-app/commit/1aa8203235be02e5c19ba06f3a099fa7db59fd5a))
+
 ## [2.5.4](https://github.com/Khumozin/news-app/compare/v2.5.3...v2.5.4) (2025-05-20)
 
 
