@@ -53,7 +53,7 @@ jobs:
     uses: khumozin/workflow-templates/.github/workflows/docker-buildx-scan-and-publish.yml@1.8.1
     with:
       image_name: news-app
-      tag: ${{ needs.semantic-release.outputs.pkg-version }}
+      tag: ${{ fromJson(needs.semantic-release.outputs.pkg-version) }}
     secrets: inherit
 
   update-manifests:
