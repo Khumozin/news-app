@@ -50,7 +50,7 @@ jobs:
   docker:
     needs: [semantic-release]
     if: ${{ needs.semantic-release.outputs.pkg-version != needs.semantic-release.outputs.prev-pkg-version }}
-    uses: khumozin/workflow-templates/.github/workflows/docker-buildx-scan-and-publish.yml@1.8.1
+    uses: khumozin/workflow-templates/.github/workflows/docker-buildx-scan-and-publish.yml@1.8.2
     with:
       image_name: news-app
       tag: ${{ fromJson(needs.semantic-release.outputs.pkg-version) }}
