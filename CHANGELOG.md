@@ -1,3 +1,10 @@
+## [2.5.2](https://github.com/Khumozin/news-app/compare/v2.5.1...v2.5.2) (2025-05-20)
+
+
+### Bug Fixes
+
+* build for multi platforms ([0a964fe](https://github.com/Khumozin/news-app/commit/0a964fea90722d357750289b245b3bb40ef1a32a))
+
 ## [2.5.1](https://github.com/Khumozin/news-app/compare/v2.5.0...v2.5.1) (2025-05-18)
 
 
