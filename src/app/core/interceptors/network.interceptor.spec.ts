@@ -13,6 +13,7 @@ import { firstValueFrom, of } from 'rxjs';
 
 import { Environment } from '../config/environment.interface';
 import { EnvironmentService } from '../config/environment.service';
+import { ENVIRONMENT } from '../config/environment.token';
 import { networkInterceptor } from './network.interceptor';
 
 const environmentMock = {
@@ -32,7 +33,7 @@ describe('NetworkInterceptor', () => {
         provideHttpClient(withInterceptors([networkInterceptor])),
         provideHttpClientTesting(),
         {
-          provide: EnvironmentService,
+          provide: ENVIRONMENT,
           useValue: {
             load: () => firstValueFrom(of(environmentMock)),
             get: (key: keyof Environment) => environmentMock[key],
@@ -43,7 +44,7 @@ describe('NetworkInterceptor', () => {
 
     http = TestBed.inject(HttpClient);
     httpController = TestBed.inject(HttpTestingController);
-    env = TestBed.inject(EnvironmentService);
+    env = TestBed.inject(ENVIRONMENT);
 
     env.load().then();
   });

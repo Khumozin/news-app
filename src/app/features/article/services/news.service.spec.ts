@@ -8,6 +8,7 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { finalize, firstValueFrom, of } from 'rxjs';
+import { ENVIRONMENT } from 'src/app/core/config/environment.token';
 import {
   Article,
   NewsApiResponse,
@@ -35,7 +36,7 @@ describe('NewsService', () => {
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         {
-          provide: EnvironmentService,
+          provide: ENVIRONMENT,
           useValue: {
             load: () => firstValueFrom(of(environmentMock)),
             get: (key: keyof Environment) => environmentMock[key],
@@ -46,7 +47,7 @@ describe('NewsService', () => {
 
     service = TestBed.inject(NewsService);
     httpController = TestBed.inject(HttpTestingController);
-    env = TestBed.inject(EnvironmentService);
+    env = TestBed.inject(ENVIRONMENT);
 
     env.load().then();
   });

@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { EnvironmentService } from '../../../core/config/environment.service';
+import { ENVIRONMENT } from '../../../core/config/environment.token';
 import { Article, NewsApiResponse, SearchParam } from '../models';
 
 @Injectable({
@@ -10,7 +10,7 @@ import { Article, NewsApiResponse, SearchParam } from '../models';
 })
 export class NewsService {
   private readonly http = inject(HttpClient);
-  private readonly env = inject(EnvironmentService);
+  private readonly env = inject(ENVIRONMENT);
   private readonly url = this.env.get('APP_API_URL');
 
   getArticles(
