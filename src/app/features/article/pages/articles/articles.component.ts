@@ -77,6 +77,10 @@ export class ArticlesComponent {
   paginator = viewChild.required(MatPaginator);
 
   onSearch(): void {
+    if (this.form.invalid) {
+      return this.form.markAllAsTouched();
+    }
+
     const query = this.buildQuery();
     this.getArticles(query);
   }

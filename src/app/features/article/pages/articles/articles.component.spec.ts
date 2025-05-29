@@ -193,4 +193,14 @@ describe('ArticlesComponent', () => {
     expect(component.articles()).toEqual(okResponse.articles);
     expect(spyOnScrollTo).toHaveBeenCalled();
   });
+
+  it('should mark form as touched and not call getArticles when form is invalid', () => {
+    spyOn(component.form, 'markAllAsTouched');
+    spyOn(component, 'getArticles');
+
+    component.onSearch();
+
+    expect(component.form.markAllAsTouched).toHaveBeenCalled();
+    expect(component.getArticles).not.toHaveBeenCalled();
+  });
 });
