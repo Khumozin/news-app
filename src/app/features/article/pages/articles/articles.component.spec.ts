@@ -17,6 +17,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { of, throwError } from 'rxjs';
+import { provideEnvironmentConfig } from 'src/app/core/config/environment.provider';
 import { Article, NewsApiResponse } from 'src/app/features/article/models';
 import { NewsService } from 'src/app/features/article/services';
 import { SkeletonDirective } from 'src/app/shared/directives';
@@ -50,6 +51,7 @@ describe('ArticlesComponent', () => {
         DestroyRef,
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
+        provideEnvironmentConfig(),
       ],
     });
     fixture = TestBed.createComponent(ArticlesComponent);
