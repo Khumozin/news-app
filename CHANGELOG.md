@@ -1,3 +1,17 @@
+# [2.6.0](https://github.com/Khumozin/news-app/compare/v2.5.5...v2.6.0) (2025-05-29)
+
+
+### Bug Fixes
+
+* add empty key ([489181d](https://github.com/Khumozin/news-app/commit/489181d596bb44b5e5dd8ddf039b26d1510a331f))
+* remove key ([5329dec](https://github.com/Khumozin/news-app/commit/5329dec10b051e2d09dfc40d98c267da26b79127))
+
+
+### Features
+
+* add environment token ([4d006a5](https://github.com/Khumozin/news-app/commit/4d006a5c7c6a27f6f1c0551d4f628b4435536ba4))
+* implement caching mechanism ([96d8a36](https://github.com/Khumozin/news-app/commit/96d8a36554326162f1c7af60a7e21ba773885b3a))
+
 ## [2.5.5](https://github.com/Khumozin/news-app/compare/v2.5.4...v2.5.5) (2025-05-20)
 
 
