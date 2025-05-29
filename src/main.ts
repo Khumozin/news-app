@@ -8,6 +8,7 @@ import { AppComponent } from './app/app.component';
 import { APP_ROUTES } from './app/app.routing';
 import { provideEnvironmentConfig } from './app/core/config/environment.provider';
 import { ENVIRONMENT } from './app/core/config/environment.token';
+import { cacheInterceptor } from './app/core/interceptors/cache.interceptor';
 import { networkInterceptor } from './app/core/interceptors/network.interceptor';
 
 function initApp() {
@@ -20,7 +21,7 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideAppInitializer(initApp),
     provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([networkInterceptor])),
+    provideHttpClient(withInterceptors([networkInterceptor, cacheInterceptor])),
     provideRouter(APP_ROUTES),
     provideEnvironmentConfig(),
   ],
