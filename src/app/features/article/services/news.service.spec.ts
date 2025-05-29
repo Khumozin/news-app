@@ -8,15 +8,15 @@ import {
 } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { finalize, firstValueFrom, of } from 'rxjs';
-import { ENVIRONMENT } from 'src/app/core/config/environment.token';
+
+import { Environment } from '../../../core/config/environment.interface';
+import { EnvironmentService } from '../../../core/config/environment.service';
+import { ENVIRONMENT } from '../../../core/config/environment.token';
 import {
   Article,
   NewsApiResponse,
   SearchParam,
-} from 'src/app/features/article/models';
-
-import { Environment } from '../../../core/config/environment.interface';
-import { EnvironmentService } from '../../../core/config/environment.service';
+} from '../../../features/article/models';
 import { NewsService } from './news.service';
 
 const environmentMock = {

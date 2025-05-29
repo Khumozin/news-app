@@ -73,3 +73,51 @@ describe('NetworkInterceptor', () => {
     req.flush({});
   });
 });
+
+describe('NetworkInterceptor Negative Tests', () => {
+  let httpController: HttpTestingController;
+  let http: HttpClient;
+  let env: EnvironmentService;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [],
+      providers: [
+        provideHttpClient(withInterceptors([networkInterceptor])),
+        provideHttpClientTesting(),
+        {
+          provide: ENVIRONMENT,
+          useValue: {
+            load: () =>
+              firstValueFrom(
+                of({ APP_API_URL: 'https://api.test.dev', APP_API_KEY: '' })
+              ),
+            get: (key: keyof Environment) =>
+              ({ APP_API_URL: 'https://api.test.dev', APP_API_KEY: '' })[key],
+          },
+        },
+      ],
+    });
+
+    http = TestBed.inject(HttpClient);
+    httpController = TestBed.inject(HttpTestingController);
+    env = TestBed.inject(ENVIRONMENT);
+
+    env.load().then();
+  });
+
+  afterEach(() => {
+    TestBed.inject(HttpTestingController).verify();
+  });
+
+  it('should NOT add the API key as a query parameter', () => {
+    const testUrl = env.get('APP_API_URL')!;
+
+    http.get(testUrl).subscribe();
+
+    const req = httpController.expectOne(testUrl);
+    expect(req.request.method).toEqual('GET');
+
+    req.flush({});
+  });
+});
