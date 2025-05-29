@@ -6,11 +6,12 @@ import { provideRouter } from '@angular/router';
 
 import { AppComponent } from './app/app.component';
 import { APP_ROUTES } from './app/app.routing';
-import { EnvironmentService } from './app/core/config/environment.service';
-import { networkInterceptor } from './app/core/interceptors';
+import { provideEnvironmentConfig } from './app/core/config/environment.provider';
+import { ENVIRONMENT } from './app/core/config/environment.token';
+import { networkInterceptor } from './app/core/interceptors/network.interceptor';
 
 function initApp() {
-  const environmentService = inject(EnvironmentService);
+  const environmentService = inject(ENVIRONMENT);
 
   return environmentService.load();
 }
@@ -21,9 +22,6 @@ bootstrapApplication(AppComponent, {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([networkInterceptor])),
     provideRouter(APP_ROUTES),
-    {
-      provide: EnvironmentService,
-      useValue: new EnvironmentService(),
-    },
+    provideEnvironmentConfig(),
   ],
 }).catch(err => console.error(err));
