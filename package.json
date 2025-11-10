@@ -1,112 +1,112 @@
 {
-    "name": "news-app",
-    "version": "2.6.0",
-    "scripts": {
-        "ng": "ng",
-        "start": "ng serve",
-        "build": "ng build",
-        "watch": "ng build --watch --configuration development",
-        "test": "ng test",
-        "commit": "git-cz",
-        "e2e": "ng e2e",
-        "cypress:open": "cypress open",
-        "cypress:run": "cypress run",
-        "cypress:run:ci": "npm run start & sleep 18 & npx cypress run",
-        "lint": "ng lint",
-        "prepare": "husky",
-        "prettier": "git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$' | xargs npx prettier --write && git add $(git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$')"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "node prettier-hook.js"
-        }
-    },
-    "private": true,
-    "plugins": [
-        "@semantic-release/commit-analyzer",
-        "@semantic-release/release-notes-generator",
-        "@semantic-release/changelog",
-        "@semantic-release/github",
-        "@semantic-release/npm",
-        "@semantic-release/git"
-    ],
-    "release": {
-        "prepare": [
-            "@semantic-release/changelog",
-            "@semantic-release/npm",
-            {
-                "path": "@semantic-release/git",
-                "assets": [
-                    "package.json",
-                    "package-lock.json",
-                    "CHANGELOG.md"
-                ],
-                "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-            }
-        ],
-        "branches": [
-            "main"
-        ]
-    },
-    "config": {
-        "commitizen": {
-            "path": "./node_modules/cz-conventional-changelog"
-        }
-    },
-    "dependencies": {
-        "@angular/animations": "^19.2.0",
-        "@angular/cdk": "^19.2.1",
-        "@angular/common": "^19.2.0",
-        "@angular/compiler": "^19.2.0",
-        "@angular/core": "^19.2.0",
-        "@angular/forms": "^19.2.0",
-        "@angular/material": "^19.2.1",
-        "@angular/platform-browser": "^19.2.0",
-        "@angular/platform-browser-dynamic": "^19.2.0",
-        "@angular/router": "^19.2.0",
-        "rxjs": "~7.8.0",
-        "tslib": "^2.3.0",
-        "zone.js": "~0.15.0"
-    },
-    "devDependencies": {
-        "@angular-devkit/build-angular": "^19.2.0",
-        "@angular-eslint/builder": "19.1.0",
-        "@angular-eslint/eslint-plugin": "19.1.0",
-        "@angular-eslint/eslint-plugin-template": "19.1.0",
-        "@angular-eslint/schematics": "19.1.0",
-        "@angular-eslint/template-parser": "19.1.0",
-        "@angular/cli": "~19.2.0",
-        "@angular/compiler-cli": "^19.2.0",
-        "@commitlint/config-conventional": "^19.7.1",
-        "@cypress/schematic": "^2.5.1",
-        "@semantic-release/changelog": "^6.0.3",
-        "@semantic-release/git": "^10.0.1",
-        "@types/jasmine": "~4.3.0",
-        "@typescript-eslint/eslint-plugin": "^7.2.0",
-        "@typescript-eslint/parser": "^7.2.0",
-        "autoprefixer": "^10.4.15",
-        "commitlint": "^19.7.1",
-        "cypress": "latest",
-        "cz-conventional-changelog": "^3.3.0",
-        "eslint": "^8.57.0",
-        "eslint-config-prettier": "^10.0.2",
-        "eslint-plugin-prettier": "^5.2.3",
-        "eslint-plugin-unused-imports": "^4.1.4",
-        "husky": "^9.1.7",
-        "jasmine-core": "~4.6.0",
-        "karma": "~6.4.0",
-        "karma-chrome-launcher": "~3.2.0",
-        "karma-coverage": "~2.2.0",
-        "karma-jasmine": "~5.1.0",
-        "karma-jasmine-html-reporter": "~2.1.0",
-        "postcss": "^8.4.29",
-        "prettier": "^3.5.2",
-        "prettier-eslint": "^16.3.0",
-        "tailwindcss": "^3.3.3",
-        "typescript": "~5.5.4"
-    },
-    "optionalDependencies": {
-        "@nx/nx-linux-x64-gnu": "^17.2.8",
-        "@rollup/rollup-linux-x64-gnu": "^4.21.1"
+  "name": "news-app",
+  "version": "2.6.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "commit": "git-cz",
+    "e2e": "ng e2e",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:ci": "npm run start & sleep 18 & npx cypress run",
+    "lint": "ng lint",
+    "prepare": "husky",
+    "prettier": "git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$' | xargs npx prettier --write && git add $(git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$')"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "node prettier-hook.js"
     }
+  },
+  "private": true,
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
+  "release": {
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ],
+    "branches": [
+      "main"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "@angular/animations": "^20.3.10",
+    "@angular/cdk": "^19.2.1",
+    "@angular/common": "^20.3.10",
+    "@angular/compiler": "^20.3.10",
+    "@angular/core": "^20.3.10",
+    "@angular/forms": "^20.3.10",
+    "@angular/material": "^19.2.1",
+    "@angular/platform-browser": "^20.3.10",
+    "@angular/platform-browser-dynamic": "^20.3.10",
+    "@angular/router": "^20.3.10",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "zone.js": "~0.15.0"
+  },
+  "devDependencies": {
+    "@angular-eslint/builder": "19.1.0",
+    "@angular-eslint/eslint-plugin": "19.1.0",
+    "@angular-eslint/eslint-plugin-template": "19.1.0",
+    "@angular-eslint/schematics": "19.1.0",
+    "@angular-eslint/template-parser": "19.1.0",
+    "@angular/build": "^20.3.9",
+    "@angular/cli": "~20.3.9",
+    "@angular/compiler-cli": "^20.3.10",
+    "@commitlint/config-conventional": "^19.7.1",
+    "@cypress/schematic": "^2.5.1",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@types/jasmine": "~4.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "autoprefixer": "^10.4.15",
+    "commitlint": "^19.7.1",
+    "cypress": "latest",
+    "cz-conventional-changelog": "^3.3.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^10.0.2",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "husky": "^9.1.7",
+    "jasmine-core": "~4.6.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "postcss": "^8.4.29",
+    "prettier": "^3.5.2",
+    "prettier-eslint": "^16.3.0",
+    "tailwindcss": "^3.3.3",
+    "typescript": "~5.9.3"
+  },
+  "optionalDependencies": {
+    "@nx/nx-linux-x64-gnu": "^17.2.8",
+    "@rollup/rollup-linux-x64-gnu": "^4.21.1"
+  }
 }
