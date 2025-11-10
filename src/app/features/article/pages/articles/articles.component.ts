@@ -1,10 +1,11 @@
-import { DatePipe, DOCUMENT, TitleCasePipe } from '@angular/common';
+import { DatePipe, TitleCasePipe } from '@angular/common';
 import {
   Component,
   DestroyRef,
   inject,
   signal,
   viewChild,
+  DOCUMENT,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
