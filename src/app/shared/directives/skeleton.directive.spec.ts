@@ -1,9 +1,4 @@
-import {
-  Component,
-  signal,
-  TemplateRef,
-  ViewContainerRef,
-} from '@angular/core';
+import { Component, signal } from '@angular/core';
 import {
   ComponentFixture,
   fakeAsync,
@@ -33,30 +28,16 @@ class TestComponent {
 describe('SkeletonDirective', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
-  let vcr: ViewContainerRef;
-  let tr: TemplateRef<any>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [TestComponent, SkeletonDirective],
-      providers: [ViewContainerRef, TemplateRef],
     });
 
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
 
-    vcr = TestBed.inject(ViewContainerRef);
-    tr = TestBed.inject(TemplateRef);
-
     fixture.detectChanges();
-  });
-
-  it('should create an instance', () => {
-    // fixes effect(() => ...) issue
-    TestBed.runInInjectionContext(() => {
-      const directive = new SkeletonDirective(tr, vcr);
-      expect(directive).toBeTruthy();
-    });
   });
 
   it('should create component', () => {
@@ -67,37 +48,19 @@ describe('SkeletonDirective', () => {
 describe('SkeletonDirective - Negative Tests', () => {
   let fixture: ComponentFixture<TestComponent>;
   let component: TestComponent;
-  let vcr: ViewContainerRef;
-  let tr: TemplateRef<any>;
 
   beforeEach(() => {
-    const viewContainerRefSpy = jasmine.createSpyObj('ViewContainerRef', [
-      'createComponent',
-      'clear',
-      'createEmbeddedView',
-    ]);
-
     TestBed.configureTestingModule({
       imports: [TestComponent, SkeletonDirective],
-      providers: [
-        {
-          provide: ViewContainerRef,
-          useValue: viewContainerRefSpy,
-        },
-        TemplateRef,
-      ],
     });
 
     fixture = TestBed.createComponent(TestComponent);
     component = fixture.componentInstance;
 
-    vcr = TestBed.inject(ViewContainerRef);
-    tr = TestBed.inject(TemplateRef);
-
     fixture.detectChanges();
   });
 
-  it('should call something', fakeAsync(() => {
+  it('should toggle loading state', fakeAsync(() => {
     component.isLoading.set(true);
 
     fixture.detectChanges();
@@ -108,7 +71,6 @@ describe('SkeletonDirective - Negative Tests', () => {
 
     tick(100);
 
-    expect(tr).toBeTruthy();
-    expect(vcr).toBeTruthy();
+    expect(component).toBeTruthy();
   }));
 });
