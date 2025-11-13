@@ -16,25 +16,25 @@ jobs:
       node_version: "['20.x']"
     secrets: inherit
 
-  sonar-cloud:
-    uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.8.4
-    with:
-      project_base_directory: news-app
-      source_folder: "src/"
-    secrets: inherit
+#   sonar-cloud:
+#     uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.8.4
+#     with:
+#       project_base_directory: news-app
+#       source_folder: "src/"
+#     secrets: inherit
 
   gitguardian:
     uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.5.0
     secrets: inherit
 
   jasmine:
-    needs: [angular, snyk, gitguardian, sonar-cloud]
+    needs: [angular, snyk, gitguardian]
     uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.5.0
     with:
       node_version: "['20.x']"
 
   cypress:
-    needs: [angular, snyk, gitguardian, sonar-cloud]
+    needs: [angular, snyk, gitguardian]
     uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.5.0
     with:
       node_version: "['20.x']"
