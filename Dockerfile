@@ -1,5 +1,5 @@
 # STAGE 1: BUILD
-FROM node:20.11.0-slim AS build
+FROM node:22.21.1-slim AS build
 
 RUN apt-get update && apt-get install -y python3 make g++ && rm -rf /var/lib/apt/lists/*
 
