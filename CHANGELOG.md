@@ -1,3 +1,10 @@
+## [2.6.1](https://github.com/Khumozin/news-app/compare/v2.6.0...v2.6.1) (2025-11-14)
+
+
+### Bug Fixes
+
+* resolve cd pipeline ([65e769b](https://github.com/Khumozin/news-app/commit/65e769b51e5eccb817271f19bb4eec810d8c9154))
+
 # [2.6.0](https://github.com/Khumozin/news-app/compare/v2.5.5...v2.6.0) (2025-05-29)
 
 
