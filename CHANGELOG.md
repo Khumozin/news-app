@@ -1,3 +1,10 @@
+## [2.6.2](https://github.com/Khumozin/news-app/compare/v2.6.1...v2.6.2) (2025-11-14)
+
+
+### Bug Fixes
+
+* update dockerfile deps ([2cfdbdc](https://github.com/Khumozin/news-app/commit/2cfdbdcfd46e74c5eb5abbcd3dca4e117f2ff695))
+
 ## [2.6.1](https://github.com/Khumozin/news-app/compare/v2.6.0...v2.6.1) (2025-11-14)
 
 
