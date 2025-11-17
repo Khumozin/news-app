@@ -7,20 +7,12 @@ import {
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DestroyRef } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
 import { provideEnvironmentConfig } from 'src/app/core/config/environment.provider';
 import { Article, NewsApiResponse } from 'src/app/features/article/models';
 import { NewsService } from 'src/app/features/article/services';
-import { SkeletonDirective } from 'src/app/shared/directives';
 
 import { ArticlesComponent } from './articles.component';
 
@@ -32,19 +24,7 @@ describe('ArticlesComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        MatInputModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        ReactiveFormsModule,
-        MatPaginatorModule,
-        NoopAnimationsModule,
-        ArticlesComponent,
-        SkeletonDirective,
-        MatSnackBarModule,
-      ],
+      imports: [NoopAnimationsModule, ArticlesComponent],
       providers: [
         NewsService,
         DatePipe,
@@ -52,6 +32,7 @@ describe('ArticlesComponent', () => {
         provideHttpClient(withInterceptorsFromDi()),
         provideHttpClientTesting(),
         provideEnvironmentConfig(),
+        provideRouter([]),
       ],
     });
     fixture = TestBed.createComponent(ArticlesComponent);
@@ -81,8 +62,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator().pageSize = 10;
-    component.paginator().pageIndex = 0;
+    component.itemsPerPage.set(10);
+    component.currentPage.set(1);
 
     const query = component.buildQuery();
 
@@ -102,8 +83,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator().pageSize = 10;
-    component.paginator().pageIndex = 0;
+    component.itemsPerPage.set(10);
+    component.currentPage.set(1);
 
     const query = component.buildQuery();
 
@@ -123,8 +104,8 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator().pageSize = 10;
-    component.paginator().pageIndex = 0;
+    component.itemsPerPage.set(10);
+    component.currentPage.set(1);
 
     const query = component.buildQuery();
 
@@ -159,39 +140,14 @@ describe('ArticlesComponent', () => {
       sortBy: 'relevancy',
     });
 
-    component.paginator().pageSize = 10;
-    component.paginator().pageIndex = 0;
+    component.itemsPerPage.set(10);
+    component.currentPage.set(1);
 
     spyOn(newsService, 'getArticles').and.returnValues(of(okResponse));
 
     component.onSearch();
 
     expect(component.articles()).toEqual(okResponse.articles);
-  });
-
-  it('should get articles when handlePageEvent is called', () => {
-    const okResponse: NewsApiResponse<Article[]> = {
-      articles: [],
-      status: 'ok',
-      totalResults: 0,
-    };
-
-    component.form.setValue({
-      from: '2023-09-08',
-      q: 'Bitcoin',
-      sortBy: 'relevancy',
-    });
-
-    component.paginator().pageSize = 10;
-    component.paginator().pageIndex = 0;
-
-    spyOn(newsService, 'getArticles').and.returnValues(of(okResponse));
-    const spyOnScrollTo = spyOn(window, 'scrollTo');
-
-    component.handlePageEvent();
-
-    expect(component.articles()).toEqual(okResponse.articles);
-    expect(spyOnScrollTo).toHaveBeenCalled();
   });
 
   it('should mark form as touched and not call getArticles when form is invalid', () => {

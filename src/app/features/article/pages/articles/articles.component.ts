@@ -19,7 +19,6 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { filter, finalize, map } from 'rxjs';
 import { toast } from 'ngx-sonner';
 
-import { SkeletonDirective } from '../../../../shared/directives';
 import { ArticleComponent } from '../../components';
 import { SortBy } from '../../enums';
 import { Article, NewsApiResponse, SearchParam } from '../../models';
@@ -32,6 +31,7 @@ import { BrnSelectImports } from '@spartan-ng/brain/select';
 import { HlmSelectImports } from '@spartan-ng/helm/select';
 import { HlmNumberedPaginationQueryParams } from '@spartan-ng/helm/pagination';
 import { HlmToasterImports } from '@spartan-ng/helm/sonner';
+import { HlmSkeletonImports } from '@spartan-ng/helm/skeleton';
 
 @Component({
   selector: 'app-articles',
@@ -42,7 +42,6 @@ import { HlmToasterImports } from '@spartan-ng/helm/sonner';
     ReactiveFormsModule,
     ArticleComponent,
     TitleCasePipe,
-    SkeletonDirective,
     MatNativeDateModule,
 
     HlmButtonImports,
@@ -52,6 +51,7 @@ import { HlmToasterImports } from '@spartan-ng/helm/sonner';
     HlmSelectImports,
     HlmNumberedPaginationQueryParams,
     HlmToasterImports,
+    HlmSkeletonImports,
   ],
 })
 export class ArticlesComponent {
