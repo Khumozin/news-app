@@ -1,51 +1,81 @@
-<form class="w-full flex-col mt-5" [formGroup]="form">
-  <div class="w-full flex justify-center items-center">
-    <mat-form-field appearance="fill">
-      <mat-label>Keywords</mat-label>
-      <input
-        matInput
-        placeholder="Search..."
-        formControlName="q"
-        data-cy="form-input-query" />
-    </mat-form-field>
+<hlm-toaster />
 
-    <mat-form-field>
-      <mat-label>Choose a date</mat-label>
-      <input
-        matInput
-        [matDatepicker]="picker"
-        formControlName="from"
-        data-cy="form-input-date" />
-      <mat-datepicker-toggle
-        matIconSuffix
-        [for]="picker"
-        data-cy="form-input-date-toggle"></mat-datepicker-toggle>
-      <mat-datepicker #picker data-cy="form-input-date-picker"></mat-datepicker>
-    </mat-form-field>
+<div class="w-full flex justify-center px-4 py-8">
+  <div class="w-full max-w-4xl">
+    <div
+      class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 p-8">
+      <h2
+        class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+        Search News Articles
+      </h2>
+
+      <form [formGroup]="form" class="space-y-6">
+        <!-- Search Input -->
+        <div class="space-y-2">
+          <div class="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Search Query
+          </div>
+          <input
+            class="w-full"
+            hlmInput
+            data-cy="form-input-query"
+            placeholder="Enter keywords to search..."
+            formControlName="q" />
+        </div>
+
+        <!-- Date and Sort Row -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Date Picker -->
+          <div class="space-y-2">
+            <div class="text-sm font-medium text-gray-700 dark:text-gray-300">
+              From Date
+            </div>
+            <hlm-date-picker
+              formControlName="from"
+              [autoCloseOnSelect]="true"
+              data-cy="form-input-date"
+              class="w-full">
+              <span>Pick a date</span>
+            </hlm-date-picker>
+          </div>
+
+          <!-- Sort By -->
+          <div class="space-y-2">
+            <div class="text-sm font-medium text-gray-700 dark:text-gray-300">
+              Sort By
+            </div>
+            <brn-select
+              class="w-full"
+              placeholder="Select sorting option"
+              formControlName="sortBy"
+              data-cy="form-input-sort">
+              <hlm-select-trigger class="w-full">
+                <hlm-select-value />
+              </hlm-select-trigger>
+              <hlm-select-content>
+                @for (sortByOption of sortByOptions; track $index) {
+                  <hlm-option [value]="sortByOption">
+                    {{ sortByOption | titlecase }}
+                  </hlm-option>
+                }
+              </hlm-select-content>
+            </brn-select>
+          </div>
+        </div>
+
+        <!-- Search Button -->
+        <div class="flex justify-center pt-2">
+          <button
+            hlmBtn
+            (click)="onSearch()"
+            data-cy="form-submit-button"
+            class="w-full md:w-auto px-12 py-6 text-base font-semibold">
+            Search Articles
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-
-  <div class="w-full flex justify-center items-center">
-    <mat-form-field>
-      <mat-label>Sort</mat-label>
-      <mat-select formControlName="sortBy" data-cy="form-input-sort">
-        @for (sortByOption of sortByOptions; track $index) {
-          <mat-option [value]="sortByOption">{{
-            sortByOption | titlecase
-          }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
-  </div>
-</form>
-
-<div class="w-full flex items-center justify-center">
-  <button
-    mat-raised-button
-    color="primary"
-    (click)="onSearch()"
-    data-cy="form-submit-button">
-    Search
-  </button>
 </div>
 
 <div class="w-full flex md:px-16 lg:px-24">
@@ -59,12 +89,12 @@
   </div>
 </div>
 
-<div class="w-full h-40 flex items-center justify-center">
-  <mat-paginator
-    (page)="handlePageEvent()"
-    [length]="totalItems()"
-    [pageSize]="pageSize()"
-    [pageSizeOptions]="pageSizeOptions"
-    aria-label="Select page">
-  </mat-paginator>
+<div class="w-full flex items-center justify-center mt-8">
+  <hlm-numbered-pagination-query-params
+    [(currentPage)]="currentPage"
+    [(itemsPerPage)]="itemsPerPage"
+    [totalItems]="totalItems()"
+    [pageSizes]="pageSizeOptions"
+    [maxSize]="7"
+    [showEdges]="true" />
 </div>
