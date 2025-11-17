@@ -1,25 +1,14 @@
 import { Component } from '@angular/core';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterOutlet } from '@angular/router';
+import TopNavComponent from './core/components/top-nav';
 
 @Component({
   selector: 'app-root',
   template: `
-    <mat-toolbar class="shadow-xl">
-      <span class="text-4xl">News App</span>
-    </mat-toolbar>
-
+    <app-top-nav />
     <router-outlet />
   `,
-  styles: [
-    `
-      mat-toolbar {
-        height: 120px;
-        display: flex;
-        justify-content: center;
-      }
-    `,
-  ],
-  imports: [MatToolbarModule, RouterOutlet],
+  styles: [],
+  imports: [TopNavComponent, RouterOutlet],
 })
 export class AppComponent {}
