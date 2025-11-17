@@ -2,9 +2,9 @@ import { DatePipe, TitleCasePipe } from '@angular/common';
 import {
   Component,
   DestroyRef,
+  effect,
   inject,
   signal,
-  viewChild,
   DOCUMENT,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -14,21 +14,24 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { MatNativeDateModule } from '@angular/material/core';
 import { filter, finalize, map } from 'rxjs';
+import { toast } from 'ngx-sonner';
 
 import { SkeletonDirective } from '../../../../shared/directives';
 import { ArticleComponent } from '../../components';
 import { SortBy } from '../../enums';
 import { Article, NewsApiResponse, SearchParam } from '../../models';
 import { NewsService } from '../../services';
+
+import { HlmButtonImports } from '@spartan-ng/helm/button';
+import { HlmInputImports } from '@spartan-ng/helm/input';
+import { HlmDatePickerImports } from '@spartan-ng/helm/date-picker';
+import { BrnSelectImports } from '@spartan-ng/brain/select';
+import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { HlmNumberedPaginationQueryParams } from '@spartan-ng/helm/pagination';
+import { HlmToasterImports } from '@spartan-ng/helm/sonner';
 
 @Component({
   selector: 'app-articles',
@@ -37,27 +40,27 @@ import { NewsService } from '../../services';
   providers: [DatePipe],
   imports: [
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatDatepickerModule,
-    MatSelectModule,
-    MatOptionModule,
-    MatButtonModule,
     ArticleComponent,
-    MatPaginatorModule,
     TitleCasePipe,
     SkeletonDirective,
-    MatSnackBarModule,
     MatNativeDateModule,
+
+    HlmButtonImports,
+    HlmInputImports,
+    HlmDatePickerImports,
+    BrnSelectImports,
+    HlmSelectImports,
+    HlmNumberedPaginationQueryParams,
+    HlmToasterImports,
   ],
 })
 export class ArticlesComponent {
   private readonly newsService = inject(NewsService);
   private readonly destroyRef = inject(DestroyRef);
-  private readonly snackBar = inject(MatSnackBar);
   private readonly document = inject(DOCUMENT);
+  private readonly route = inject(ActivatedRoute);
 
-  protected readonly pageSizeOptions = [5, 10, 25];
+  protected readonly pageSizeOptions = [5, 10, 25, 50];
 
   protected readonly sortByOptions = Object.keys(SortBy).filter(item =>
     isNaN(Number.parseInt(item))
@@ -66,8 +69,10 @@ export class ArticlesComponent {
   articles = signal<Article[]>([]);
   isLoading = signal(false);
   totalItems = signal(0);
-  pageSize = signal(10);
-  pageIndex = signal(0);
+
+  // Pagination signals that work with Spartan pagination
+  currentPage = signal(1);
+  itemsPerPage = signal(10);
 
   form = new FormGroup({
     q: new FormControl<string>('', [Validators.required]),
@@ -75,25 +80,50 @@ export class ArticlesComponent {
     sortBy: new FormControl<keyof typeof SortBy>('relevancy'),
   });
 
-  paginator = viewChild.required(MatPaginator);
+  constructor() {
+    // Sync pagination with query params - refetch data when page/size changes
+    effect(() => {
+      this.currentPage();
+      this.itemsPerPage();
+
+      // When pagination changes, fetch new data (but not on initial load)
+      if (this.form.valid && this.articles().length > 0) {
+        const query = this.buildQuery();
+        this.getArticles(query);
+
+        // Scroll to top on page change
+        this.document.defaultView?.scrollTo({
+          behavior: 'smooth',
+          top: 0,
+        });
+      }
+    });
+
+    // Read initial query params
+    this.route.queryParams
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(params => {
+        const page = Number(params['page']) || 1;
+        const pageSize = Number(params['pageSize']) || 10;
+
+        if (page !== this.currentPage()) {
+          this.currentPage.set(page);
+        }
+        if (pageSize !== this.itemsPerPage()) {
+          this.itemsPerPage.set(pageSize);
+        }
+      });
+  }
 
   onSearch(): void {
     if (this.form.invalid) {
       return this.form.markAllAsTouched();
     }
 
+    // Reset to page 1 when searching
+    this.currentPage.set(1);
     const query = this.buildQuery();
     this.getArticles(query);
-  }
-
-  handlePageEvent() {
-    const query = this.buildQuery();
-    this.getArticles(query);
-
-    this.document.defaultView?.scrollTo({
-      behavior: 'smooth',
-      top: 0,
-    });
   }
 
   buildQuery(): SearchParam {
@@ -103,8 +133,8 @@ export class ArticlesComponent {
       q: encodeURI(q!),
       from: new Date(from!).toISOString().split('T')[0],
       sortBy,
-      pageSize: this.paginator().pageSize,
-      page: this.paginator().pageIndex + 1,
+      pageSize: this.itemsPerPage(),
+      page: this.currentPage(),
     } as SearchParam;
   }
 
@@ -138,9 +168,9 @@ export class ArticlesComponent {
   }
 
   openSnackBar(message: string) {
-    this.snackBar.open(message, 'Dismiss', {
+    toast.error(message, {
+      description: 'Please check your request and try again',
       duration: 5000,
-      panelClass: ['snackbar-error'],
     });
   }
 }
