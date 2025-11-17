@@ -82,6 +82,7 @@
     "@cypress/schematic": "^2.5.1",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
+    "@spartan-ng/cli": "^0.0.1-alpha.560",
     "@types/jasmine": "~4.3.0",
     "@typescript-eslint/eslint-plugin": "^7.2.0",
     "@typescript-eslint/parser": "^7.2.0",
