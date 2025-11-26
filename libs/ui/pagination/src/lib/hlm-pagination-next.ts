@@ -63,6 +63,6 @@ export class HlmPaginationNext {
   );
 
   protected readonly _computedClass = computed(() =>
-    hlm('gap-1', !this.iconOnly() ? 'sm:pr-2.5' : '', this.userClass())
+    hlm('gap-1 px-2.5', !this.iconOnly() ? 'sm:pr-2.5' : '', this.userClass())
   );
 }
