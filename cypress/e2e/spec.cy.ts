@@ -27,9 +27,8 @@ const API_RESPONSE = {
       },
       author:
         'Mickey Koss, Contributor, \n Mickey Koss, Contributor\n https://www.forbes.com/sites/mikalkoss/',
-      title: 'Grayscale’s Crypto Fund Discounts Extend Far Beyond Bitcoin',
-      description:
-        'The world’s largest digital asset manager offers 17 products tracking ether, bitcoin cash, chainlink, and many others that trade far away from the value of their underlying collateral. Should investors see them as trading opportunities?',
+      title: `Grayscale's Crypto Fund Discounts Extend Far Beyond Bitcoin`,
+      description: `The world's largest digital asset manager offers 17 products tracking ether, bitcoin cash, chainlink, and many others that trade far away from the value of their underlying collateral. Should investors see them as trading opportunities?`,
       url: 'https://www.forbes.com/sites/digital-assets/2023/09/21/grayscales-crypto-fund-discounts-extend-far-beyond-bitcoin/',
       urlToImage:
         'https://imageio.forbes.com/specials-images/imageserve/650b4291c1b2cc280fc13f07/0x0.jpg?format=jpg&width=1200',
@@ -61,7 +60,7 @@ const API_RESPONSE = {
       },
       author: 'Shaurya Malwa',
       title:
-        "Bitcoin’s 87% Drop in 2021 Was Caused by Sam Bankman-Fried's Alameda, Ex-Employee Claims",
+        "Bitcoin's 87% Drop in 2021 Was Caused by Sam Bankman-Fried's Alameda, Ex-Employee Claims",
       description:
         "An ex-Alameda employee claims a trader at the firm punched in a wrong decimal which led to bitcoin's 87% drop on Binance.US in 2021.",
       url: 'https://finance.yahoo.com/news/bitcoin-87-drop-2021-caused-073440072.html',
@@ -77,8 +76,7 @@ const API_RESPONSE = {
         name: 'Biztoc.com',
       },
       author: 'cryptoslate.com',
-      title:
-        'Mt. Gox trustee extends hacked exchange’s Bitcoin repayment deadline to October 2024',
+      title: `Mt. Gox trustee extends hacked exchange's Bitcoin repayment deadline to October 2024`,
       description:
         'The trustee of the hacked crypto exchange Mt. Gox has extended the repayment deadline by a year to Oct. 31, 2024. A Sept. 21 letter published by the Rehabilitation Trustee stated that the extension was necessary to complete all the repayment processes before …',
       url: 'https://biztoc.com/x/be84242985cd424b',
@@ -94,7 +92,7 @@ const API_RESPONSE = {
       },
       author: 'Shaurya Malwa',
       title:
-        "Bitcoin’s 87% Drop in 2021 Was Caused by Sam Bankman-Fried's Alameda, Ex-Employee Claims",
+        "Bitcoin's 87% Drop in 2021 Was Caused by Sam Bankman-Fried's Alameda, Ex-Employee Claims",
       description:
         "An ex-Alameda employee claims a trader at the firm punched in a wrong decimal which led to bitcoin's 87% drop on Binance.US in 2021.",
       url: 'https://www.coindesk.com/markets/2023/09/21/bitcoins-87-drop-in-2021-was-caused-by-sam-bankman-frieds-alameda-ex-employee-claims/',
@@ -113,7 +111,7 @@ const API_RESPONSE = {
       title:
         "BNB, XRP Lead Slide in Crypto Majors as Mt. Gox's Repayment Delay Fails to Bouy Bitcoin Prices",
       description:
-        '“We still believe that the chances of further declines are higher for now,” one analyst said.',
+        '"We still believe that the chances of further declines are higher for now," one analyst said.',
       url: 'https://www.coindesk.com/markets/2023/09/21/bnb-xrp-lead-slide-in-crypto-majors-as-mt-goxs-repayment-delay-fails-to-bouy-bitcoin-prices/',
       urlToImage:
         'https://www.coindesk.com/resizer/AVoWSxFi7b1uBIA1MYMliNI9vqw=/1200x628/center/middle/cloudfront-us-east-1.images.arcpublishing.com/coindesk/FHUONZDL3FF25LQTCH6HDI7DGI.jpg',
@@ -127,8 +125,7 @@ const API_RESPONSE = {
         name: 'Techreport.com',
       },
       author: 'Nick Dunn',
-      title:
-        'Ripple Price Forecast: New York Regulators Delists Ripple, What’s Next For XRP?',
+      title: `Ripple Price Forecast: New York Regulators Delists Ripple, What's Next For XRP?`,
       description:
         'The recent Ripple delisting from the New York roster of permitted cryptocurrencies raises concern within the crypto market. Despite this negative news, XRP is showing strong performance in the market....\nThe post Ripple Price Forecast: New York Regulators Del…',
       url: 'https://techreport.com/crypto-news/ripple-price-forecast-new-york-regulators-delists-ripple-whats-next-for-xrp/',
@@ -183,6 +180,8 @@ describe('Test App', () => {
 
   it('Search for news', () => {
     const query = 'Bitcoin';
+    const date = new Date();
+    const day = date.getDate();
 
     cy.intercept('GET', 'https://newsapi.org/v2/everything*', req => {
       req.reply({
@@ -195,22 +194,33 @@ describe('Test App', () => {
 
     cy.get('[data-cy="form-input-query"]').type(query);
 
-    // Note: Date picker interaction has been simplified - the new Spartan UI date picker
-    // works differently than Material Design. For now, we'll skip date selection
-    // as it requires specific interaction with the new component structure.
-    // The test focuses on the core search functionality.
+    // Open the datepicker using the button within the date picker component
+    cy.get('[data-cy="form-input-date"]').find('button').click();
 
-    // Select sort option using the new Spartan UI select component
-    cy.get('[data-cy="form-input-sort"]').click();
+    cy.wait(50); // wait for datepicker to be rendered before clicking on it
+
+    // Select today's date in the Spartan UI calendar
+    cy.get('[role="dialog"]').should('be.visible');
+    cy.get('[role="dialog"]')
+      .find('button')
+      .contains(day.toString())
+      .not('[data-disabled="true"]')
+      .not('[data-outside-month="true"]')
+      .click();
+
+    // Wait for dialog to close
+    cy.get('[role="dialog"]').should('not.exist');
+
+    // Select sort option using Spartan UI select - click the trigger button
+    cy.get('[data-cy="form-input-sort"]').find('button').click();
 
     cy.wait(100); // wait for dropdown to open
 
-    // The new Spartan UI uses hlm-option instead of mat-option
     cy.get('hlm-option').contains('Popularity').click();
 
     cy.get('[data-cy="form-submit-button"]').click();
 
-    // The new UI uses hlm-skeleton instead of skeleton-rect
+    // Updated skeleton loader selector for Spartan UI
     cy.get('hlm-skeleton').should('have.length.greaterThan', 1);
 
     cy.get('div').contains(`${API_RESPONSE.totalResults}`);

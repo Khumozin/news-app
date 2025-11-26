@@ -1,6 +1,14 @@
 {
   "permissions": {
-    "allow": ["Bash(npm run cypress:run:*)", "Bash(npm install:*)"],
+    "allow": [
+      "Bash(npm run cypress:run:*)",
+      "Bash(npm install:*)",
+      "Bash(npx cypress cache clear:*)",
+      "Bash(npx cypress verify)",
+      "Bash(npx cypress:*)",
+      "Bash(npm run cypress:run:ci:*)",
+      "Bash(npm info:*)"
+    ],
     "deny": [],
     "ask": []
   }
