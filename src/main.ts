@@ -1,5 +1,9 @@
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
-import { inject, provideAppInitializer } from '@angular/core';
+import {
+  inject,
+  provideAppInitializer,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
@@ -19,6 +23,7 @@ function initApp() {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZoneChangeDetection(),
     provideAppInitializer(initApp),
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([networkInterceptor, cacheInterceptor])),

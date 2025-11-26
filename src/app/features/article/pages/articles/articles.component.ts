@@ -15,7 +15,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { MatNativeDateModule } from '@angular/material/core';
 import { filter, finalize, map } from 'rxjs';
 import { toast } from 'ngx-sonner';
 
@@ -42,7 +41,6 @@ import { HlmSkeletonImports } from '@spartan-ng/helm/skeleton';
     ReactiveFormsModule,
     ArticleComponent,
     TitleCasePipe,
-    MatNativeDateModule,
 
     HlmButtonImports,
     HlmInputImports,
