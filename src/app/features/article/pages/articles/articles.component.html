@@ -108,7 +108,7 @@
       }
     } @else {
       @for (article of articles(); track $index) {
-        <article [article]="article"></article>
+        <app-article [article]="article" />
       }
     }
   </div>

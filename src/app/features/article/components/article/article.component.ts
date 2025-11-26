@@ -4,7 +4,7 @@ import { Component, input, signal } from '@angular/core';
 import { Article } from '../../models';
 
 @Component({
-  selector: 'article',
+  selector: 'app-article',
   templateUrl: './article.component.html',
   imports: [DatePipe],
 })
