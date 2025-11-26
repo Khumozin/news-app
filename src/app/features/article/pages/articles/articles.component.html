@@ -2,17 +2,15 @@
 
 <div class="w-full flex justify-center px-4 py-8">
   <div class="w-full max-w-4xl">
-    <div
-      class="bg-white dark:bg-gray-900 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 p-8">
-      <h2
-        class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+    <div class="bg-card rounded-2xl shadow-lg border border-border p-8">
+      <h2 class="text-2xl font-bold text-foreground mb-6 text-center">
         Search News Articles
       </h2>
 
       <form [formGroup]="form" class="space-y-6">
         <!-- Search Input -->
         <div class="space-y-2">
-          <div class="text-sm font-medium text-gray-700 dark:text-gray-300">
+          <div class="text-sm font-medium text-muted-foreground">
             Search Query
           </div>
           <input
@@ -27,7 +25,7 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <!-- Date Picker -->
           <div class="space-y-2">
-            <div class="text-sm font-medium text-gray-700 dark:text-gray-300">
+            <div class="text-sm font-medium text-muted-foreground">
               From Date
             </div>
             <hlm-date-picker
@@ -41,9 +39,7 @@
 
           <!-- Sort By -->
           <div class="space-y-2">
-            <div class="text-sm font-medium text-gray-700 dark:text-gray-300">
-              Sort By
-            </div>
+            <div class="text-sm font-medium text-muted-foreground">Sort By</div>
             <brn-select
               class="w-full"
               placeholder="Select sorting option"
@@ -85,7 +81,7 @@
       @for (_ of [1, 2, 3, 4, 5, 6]; track $index) {
         <!-- Skeleton Card -->
         <div
-          class="flex flex-col overflow-hidden rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 shadow-sm h-full">
+          class="flex flex-col overflow-hidden rounded-2xl bg-card border border-border shadow-sm h-full">
           <!-- Skeleton Image -->
           <hlm-skeleton class="w-full aspect-video rounded-none" />
 
@@ -103,7 +99,7 @@
 
             <!-- Skeleton Footer -->
             <div
-              class="flex items-center justify-between pt-3 border-t border-gray-100 dark:border-gray-800">
+              class="flex items-center justify-between pt-3 border-t border-border">
               <hlm-skeleton class="h-3 w-24" />
               <hlm-skeleton class="h-3 w-16" />
             </div>

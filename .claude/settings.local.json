@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": ["Bash(npm run cypress:run:*)", "Bash(npm install:*)"],
+    "deny": [],
+    "ask": []
+  }
+}
