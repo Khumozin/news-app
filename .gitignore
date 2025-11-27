@@ -45,3 +45,4 @@ Thumbs.db
 .nx/*
 
 .env
+src/assets/config.json

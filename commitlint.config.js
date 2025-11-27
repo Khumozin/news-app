@@ -16,6 +16,7 @@ module.exports = {
         "revert",
         "style",
         "ticket",
+        "test",
       ],
     ],
     'body-max-line-length': [0, 'always', Infinity]

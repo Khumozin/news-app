@@ -190,7 +190,7 @@ describe('Test App', () => {
       });
     });
 
-    cy.get('div').contains(`0 of 0`);
+    cy.get('b').contains(`0`);
 
     cy.get('[data-cy="form-input-query"]').type(query);
 
