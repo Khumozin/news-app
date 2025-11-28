@@ -43,26 +43,7 @@ This README provides an overview of a News App built with Angular, Angular Mater
    npm install
    ```
 
-4. Configure the application:
-
-   Create a `config.json` file from the example:
-
-   ```bash
-   cp src/assets/config.json.example src/assets/config.json
-   ```
-
-   Then edit `src/assets/config.json` and add your NewsAPI key:
-
-   ```json
-   {
-     "APP_API_URL": "https://newsapi.org/v2/everything",
-     "APP_API_KEY": "your-newsapi-key-here"
-   }
-   ```
-
-   Get your free API key from [newsapi.org](https://newsapi.org/register).
-
-5. Build the application:
+4. Build the application:
 
    ```bash
    ng build
