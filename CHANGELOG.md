@@ -1,3 +1,29 @@
+# [2.4.0](https://github.com/Khumozin/news-app/compare/v2.3.0...v2.4.0) (2025-11-28)
+
+
+### Bug Fixes
+
+* add config setup script for CI/CD environments ([cddb58b](https://github.com/Khumozin/news-app/commit/cddb58bc68fe9fe73aad1e8106c4cbbee18c3ad6))
+* build for multi platforms ([2c54f21](https://github.com/Khumozin/news-app/commit/2c54f210db73eccafe547b82dcd8797b8700eef4))
+* remove chainguard from dockerfile ([deb24e8](https://github.com/Khumozin/news-app/commit/deb24e84736bfd71a55a6a54d0ba8f0ff260bd44))
+* remove key ([fe680af](https://github.com/Khumozin/news-app/commit/fe680af99b6373fa95eb62112c6d4e1ecddb7a13))
+* remove quotes from image tag ([9a0383c](https://github.com/Khumozin/news-app/commit/9a0383ce94c63d0efed5ae03891a9b68696d1e87))
+* reomve CMD nginx ([01906fe](https://github.com/Khumozin/news-app/commit/01906fea3620dfa452f5e2ffc96159a4cec99d6c))
+* resolve cd pipeline ([6013637](https://github.com/Khumozin/news-app/commit/60136371911d3c1bf6844aa3df58707239a89695))
+* update dockerfile deps ([7b896b9](https://github.com/Khumozin/news-app/commit/7b896b9f86444cf2b2ba737101eb0cf2b83db6f3))
+* use docker build 1.8.1 ([7565b81](https://github.com/Khumozin/news-app/commit/7565b81c50de30d96bb4ee568fed25cc813a48ad))
+* use latest docker build (1..8.2) ([1ee1f7b](https://github.com/Khumozin/news-app/commit/1ee1f7b10ed61b0682008c83c9ddd344e8c328bd))
+* use nginx chainguard image ([f36be75](https://github.com/Khumozin/news-app/commit/f36be750daf984f9314f817f7772b21a5d3da760))
+* use nginx chainguard image ([8fc21ad](https://github.com/Khumozin/news-app/commit/8fc21ad410c20a5f8706e806e19d2b4ff2da8730))
+
+
+### Features
+
+* add environment token ([c3205d4](https://github.com/Khumozin/news-app/commit/c3205d45b66a9a3dbe9c14d6dfa345a70e332f86))
+* add styles to snackbar ([d9b5fad](https://github.com/Khumozin/news-app/commit/d9b5fad3bd0556a2bb0cd557a41ca29f920a33bc))
+* implement caching mechanism ([26e1c23](https://github.com/Khumozin/news-app/commit/26e1c23ca906a696993ae5ee3065d71574f93f42))
+* implement dynamic config ([b735b03](https://github.com/Khumozin/news-app/commit/b735b030599f561d4f193e6fc0af31becfc5fbcf))
+
 ## [2.6.2](https://github.com/Khumozin/news-app/compare/v2.6.1...v2.6.2) (2025-11-14)
 
 
