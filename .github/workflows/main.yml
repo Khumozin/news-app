@@ -8,12 +8,12 @@ jobs:
   angular:
     uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.5.0
     with:
-      node_version: "['20.x']"
+      node_version: "['22.x']"
 
   snyk:
     uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.5.0
     with:
-      node_version: "['20.x']"
+      node_version: "['22.x']"
     secrets: inherit
 
 #   sonar-cloud:
@@ -27,20 +27,20 @@ jobs:
     uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.5.0
     secrets: inherit
 
-  jasmine:
-    needs: [angular, snyk, gitguardian]
-    uses: khumozin/workflow-templates/.github/workflows/angular-unit-test-app.yml@1.5.0
+  vitest:
+    needs: [angular]
+    uses: khumozin/workflow-templates/.github/workflows/angular-vitest-app.yml@1.9.0
     with:
-      node_version: "['20.x']"
+      node_version: "['22.x']"
 
   cypress:
     needs: [angular, snyk, gitguardian]
     uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.5.0
     with:
-      node_version: "['20.x']"
+      node_version: "['22.x']"
 
   semantic-release:
-    needs: [jasmine, cypress]
+    needs: [vitest, cypress]
     uses: khumozin/workflow-templates/.github/workflows/nodejs-semantic-release.yml@1.5.0
     with:
       node_version: "['22.x']"
