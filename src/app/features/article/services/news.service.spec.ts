@@ -1,3 +1,8 @@
+// Load compiler FIRST to enable JIT compilation
+import '@angular/compiler';
+import 'zone.js';
+import 'zone.js/testing';
+
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -6,8 +11,19 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
-import { finalize, firstValueFrom, of } from 'rxjs';
+import { getTestBed, TestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+
+// Initialize TestBed
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
+import { firstValueFrom, of } from 'rxjs';
+import { describe, it, beforeEach, afterEach, expect } from 'vitest';
 
 import { Environment } from '../../../core/config/environment.interface';
 import { EnvironmentService } from '../../../core/config/environment.service';
@@ -60,7 +76,7 @@ describe('NewsService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return an observable of articles when getArticles is called', done => {
+  it('should return an observable of articles when getArticles is called', async () => {
     const mock: NewsApiResponse<Article[]> = {
       articles: [],
       status: 'ok',
@@ -75,12 +91,7 @@ describe('NewsService', () => {
       pageSize: 10,
     };
 
-    service
-      .getArticles(query)
-      .pipe(finalize(done))
-      .subscribe({
-        next: res => expect(res.status).toEqual('ok'),
-      });
+    const promise = firstValueFrom(service.getArticles(query));
 
     const req = httpController.expectOne(
       `${env.get('APP_API_URL')!}?from=2023-09-08&q=Bitcoin&sortBy=relevancy&page=1&pageSize=10`
@@ -89,6 +100,8 @@ describe('NewsService', () => {
 
     req.flush(mock);
 
+    const res = await promise;
+    expect(res.status).toEqual('ok');
     expect(req.request.params).toBeTruthy();
   });
 });

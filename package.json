@@ -14,8 +14,7 @@
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
-    "cypress:run:ci": "bash scripts/setup-config.sh && npm run start & sleep 18 & npx cypress run",
-    "pretest": "bash scripts/setup-config.sh",
+    "cypress:run:ci": "npm run start & sleep 18 & npx cypress run",
     "lint": "ng lint",
     "prepare": "husky",
     "prettier": "git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$' | xargs npx prettier --write && git add $(git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$')"

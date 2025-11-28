@@ -1,4 +1,21 @@
-import { TestBed } from '@angular/core/testing';
+// Load compiler FIRST to enable JIT compilation
+import '@angular/compiler';
+import 'zone.js';
+import 'zone.js/testing';
+
+import { getTestBed, TestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+
+// Initialize TestBed
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
+
+import { describe, it, beforeEach, expect, vi } from 'vitest';
 
 import { Environment } from './environment.interface';
 import { EnvironmentService } from './environment.service';
@@ -18,13 +35,8 @@ describe('EnvironmentService', () => {
     service = TestBed.inject(EnvironmentService);
   });
 
-  afterEach(() => {
-    // Clean up the spy
-    (window.fetch as jasmine.Spy).and.callThrough?.();
-  });
-
   it('should load environment config', async () => {
-    spyOn(globalThis, 'fetch').and.resolveTo(
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(JSON.stringify(mockConfig))
     );
 

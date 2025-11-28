@@ -1,3 +1,8 @@
+// Load compiler FIRST to enable JIT compilation
+import '@angular/compiler';
+import 'zone.js';
+import 'zone.js/testing';
+
 import {
   HttpClient,
   HttpInterceptorFn,
@@ -8,8 +13,19 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { TestBed } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+
+// Initialize TestBed
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
 import { firstValueFrom, of } from 'rxjs';
+import { describe, it, beforeEach, afterEach, expect } from 'vitest';
 
 import { Environment } from '../config/environment.interface';
 import { EnvironmentService } from '../config/environment.service';

@@ -1,3 +1,8 @@
+// Load compiler FIRST to enable JIT compilation
+import '@angular/compiler';
+import 'zone.js';
+import 'zone.js/testing';
+
 import {
   HttpClient,
   HttpInterceptorFn,
@@ -8,8 +13,19 @@ import {
   HttpTestingController,
   provideHttpClientTesting,
 } from '@angular/common/http/testing';
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { getTestBed, TestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+
+// Initialize TestBed
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
 import { firstValueFrom, of } from 'rxjs';
+import { describe, it, beforeEach, expect } from 'vitest';
 
 import { Environment } from '../config/environment.interface';
 import { EnvironmentService } from '../config/environment.service';
@@ -108,7 +124,7 @@ describe('cacheInterceptor', () => {
     req.flush(mock);
   });
 
-  it('should return undefined when cache is expired', fakeAsync(() => {
+  it('should return undefined when cache is expired', async () => {
     const apiKey = env.get('APP_API_KEY')!;
     const testUrl = env.get('APP_API_URL')!;
     const expectedUrl = `${testUrl}?apiKey=${apiKey}`;
@@ -120,7 +136,6 @@ describe('cacheInterceptor', () => {
     };
 
     let firstResponse: unknown;
-    let secondResponse: unknown;
 
     http.get(expectedUrl).subscribe(res => {
       firstResponse = res;
@@ -132,9 +147,10 @@ describe('cacheInterceptor', () => {
 
     expect((firstResponse as typeof mock).status).toEqual('ok');
 
-    // Simulate delay of 3.5 seconds
-    tick(3500);
+    // Wait for 3.5 seconds for cache to expire
+    await new Promise(resolve => setTimeout(resolve, 3500));
 
+    let secondResponse: unknown;
     http.get(expectedUrl).subscribe(res => {
       secondResponse = res;
     });
@@ -144,7 +160,7 @@ describe('cacheInterceptor', () => {
     req2.flush(mock);
 
     expect((secondResponse as typeof mock).status).toEqual('ok');
-  }));
+  });
 
   it('should NOT cache', () => {
     const apiKey = env.get('APP_API_KEY')!;

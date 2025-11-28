@@ -1,3 +1,31 @@
+// Load compiler FIRST to enable JIT compilation
+import '@angular/compiler';
+import 'zone.js';
+import 'zone.js/testing';
+
+// Mock window.matchMedia for ngx-sonner compatibility
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: (query: string) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: () => {},
+    removeListener: () => {},
+    addEventListener: () => {},
+    removeEventListener: () => {},
+    dispatchEvent: () => false,
+  }),
+});
+
+// Mock ResizeObserver for @spartan-ng/brain components
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+(global as any).ResizeObserver = class ResizeObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};
+
 import { DatePipe } from '@angular/common';
 import {
   HttpErrorResponse,
@@ -6,10 +34,21 @@ import {
 } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { DestroyRef } from '@angular/core';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, getTestBed, TestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting,
+} from '@angular/platform-browser-dynamic/testing';
+
+// Initialize TestBed
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting()
+);
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { describe, it, beforeEach, expect, vi } from 'vitest';
 import { provideEnvironmentConfig } from 'src/app/core/config/environment.provider';
 import { Article, NewsApiResponse } from 'src/app/features/article/models';
 import { NewsService } from 'src/app/features/article/services';
@@ -48,7 +87,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should open snackbar when openSnackBar is called', () => {
-    const spyOnOpenSnackBar = spyOn(component, 'openSnackBar');
+    const spyOnOpenSnackBar = vi.spyOn(component, 'openSnackBar');
 
     component.openSnackBar('Hello');
 
@@ -88,7 +127,7 @@ describe('ArticlesComponent', () => {
 
     const query = component.buildQuery();
 
-    spyOn(newsService, 'getArticles').and.returnValues(of(okResponse));
+    vi.spyOn(newsService, 'getArticles').mockReturnValue(of(okResponse));
 
     component.getArticles(query);
 
@@ -96,7 +135,7 @@ describe('ArticlesComponent', () => {
   });
 
   it('should throw HttpErrorResponse when getArticles is called', () => {
-    const spyOnOpenSnackBar = spyOn(component, 'openSnackBar');
+    const spyOnOpenSnackBar = vi.spyOn(component, 'openSnackBar');
 
     component.form.setValue({
       from: '2023-09-08',
@@ -109,7 +148,7 @@ describe('ArticlesComponent', () => {
 
     const query = component.buildQuery();
 
-    spyOn(newsService, 'getArticles').and.returnValues(
+    vi.spyOn(newsService, 'getArticles').mockReturnValue(
       throwError(
         () =>
           new HttpErrorResponse({
@@ -143,7 +182,7 @@ describe('ArticlesComponent', () => {
     component.itemsPerPage.set(10);
     component.currentPage.set(1);
 
-    spyOn(newsService, 'getArticles').and.returnValues(of(okResponse));
+    vi.spyOn(newsService, 'getArticles').mockReturnValue(of(okResponse));
 
     component.onSearch();
 
@@ -151,8 +190,8 @@ describe('ArticlesComponent', () => {
   });
 
   it('should mark form as touched and not call getArticles when form is invalid', () => {
-    spyOn(component.form, 'markAllAsTouched');
-    spyOn(component, 'getArticles');
+    vi.spyOn(component.form, 'markAllAsTouched');
+    vi.spyOn(component, 'getArticles');
 
     component.onSearch();
 
