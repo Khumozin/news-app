@@ -41,3 +41,11 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# NX
+.nx/*
+
+.env
+
+# Local config with real secrets
+public/config.local.json

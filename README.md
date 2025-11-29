@@ -1,59 +1,109 @@
-# NewsApp
+# News App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+This README provides an overview of a News App built with Angular, Angular Material & Tailwindcss, Semantic Release, GitHub Actions for CI/CD, Cypress for end-to-end tests, and Jasmine & Karma for unit tests. This app fetches news data from [newsapi.org](https://newsapi.org/) using their REST API.
 
-## Development server
+## Table of Contents
 
-To start a local development server, run:
+- [Features](#features)
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Running the Application](#running-the-application)
+- [Running Tests](#running-tests)
+- [Deployment](#deployment)
+- [Continuous Integration](#continuous-integration)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- Display news articles from various sources and categories.
+- Search for news articles using keywords.
+- View detailed information about individual news articles.
+- Responsive design for mobile and desktop.
+- End-to-end tests to ensure app functionality.
+- Unit tests for robust code quality.
+
+## Getting Started
+
+1. Clone the repository to your local machine:
+
+   ```bash
+   git clone https://github.com/your-username/news-app.git
+   ```
+
+2. Change to the project directory:
+
+   ```bash
+   cd news-app
+   ```
+
+3. Install the project dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Build the application:
+
+   ```bash
+   ng build
+   ```
+
+## Project Structure
+
+The project structure is organized as follows:
+
+- `src/app`: Contains the Angular application components, services, and modules.
+- `src/assets`: Includes static assets like images, icons, and styles.
+- `cypress`: Contains end-to-end test files.
+- `karma.conf.js`: Configuration file for Karma and Jasmine unit-testing.
+- `.github/workflows`: Configuration files for Github Actions and Semantic Release.
+
+## Running the Application
+
+To run the application locally, use the following command:
 
 ```bash
 ng serve
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+This will start a development server, and you can access the app in your web browser at `http://localhost:4200`.
 
-## Code scaffolding
+## Running Tests
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Unit Tests with Jasmine & Karma
 
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+You can run unit tests using the following command:
 
 ```bash
-ng generate --help
+ng test --code-coverage
 ```
 
-## Building
+### End-to-End Tests with Cypress
 
-To build the project run:
+You can run end-to-end tests using the following command:
 
 ```bash
-ng build
+ng serve --port=4200
 ```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
 
 ```bash
-ng test
+npx cypress run
 ```
 
-## Running end-to-end tests
+## Continuous Integration
 
-For end-to-end (e2e) testing, run:
+Continuous Integration (CI) is set up using GitHub Actions to automate the build, test, and deployment processes. The workflow can be found in the .github/workflows directory. Make sure to configure the necessary environment variables and deployment settings in your CI/CD platform.
 
-```bash
-ng e2e
-```
+## Contributing
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+If you would like to contribute to this project, please follow these steps:
 
-## Additional Resources
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make your changes and test them thoroughly.
+4. Create a pull request with a clear description of you changes.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## License
+This News App project is licensed under the `MIT License`. Feel free to use and modify it as per your requirements.

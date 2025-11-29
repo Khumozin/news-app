@@ -1,0 +1,7 @@
+gitleaks protect --staged --verbose --no-banner
+
+npx lint-staged
+
+npm run test -- --watch=false
+
+npm run cypress:run:ci
