@@ -6,23 +6,33 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage",
-    "commit": "git-cz",
+    "test": "ng test",
+    "test:coverage": "ng test --coverage --coverage-include='src/app/**/*.ts' --coverage-exclude='libs/**' --coverage-exclude='**/*.spec.ts'",
+    "test:watch": "ng test --watch",
     "e2e": "ng e2e",
     "cypress:open": "cypress open",
     "cypress:run": "cypress run",
     "cypress:run:ci": "npm run start & sleep 18 & npx cypress run",
-    "lint": "ng lint",
-    "prepare": "husky",
-    "prettier": "git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$' | xargs npx prettier --write && git add $(git diff --staged --name-only --diff-filter=d | grep -E '\\.(ts|json|scss|html)$')"
+    "commit": "git-cz",
+    "lint": "ng lint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "node prettier-hook.js"
-    }
+  "prettier": {
+    "printWidth": 80,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "lint-staged": {
+    "src/**/*.{ts,html,json,scss,css}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
   },
   "private": true,
   "plugins": [
@@ -56,67 +66,50 @@
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
+  "packageManager": "npm@10.9.2",
   "dependencies": {
-    "@angular/animations": "^21.0.1",
-    "@angular/cdk": "^21.0.0",
-    "@angular/common": "^21.0.1",
-    "@angular/compiler": "^21.0.1",
-    "@angular/core": "^21.0.1",
-    "@angular/forms": "^21.0.1",
-    "@angular/platform-browser": "^21.0.1",
-    "@angular/platform-browser-dynamic": "^21.0.1",
-    "@angular/router": "^21.0.1",
+    "@angular/cdk": "20.0.0",
+    "@angular/common": "^21.0.0",
+    "@angular/compiler": "^21.0.0",
+    "@angular/core": "^21.0.0",
+    "@angular/forms": "^21.0.0",
+    "@angular/platform-browser": "^21.0.0",
+    "@angular/router": "^21.0.0",
     "@ng-icons/core": ">=32.0.0 <34.0.0",
     "@ng-icons/lucide": ">=32.0.0 <34.0.0",
-    "@spartan-ng/brain": "^0.0.1-alpha.567",
-    "@tailwindcss/postcss": "^4.1.17",
+    "@spartan-ng/brain": "^0.0.1-alpha.569",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "ngx-sonner": ">=3.0.0",
     "rxjs": "~7.8.0",
     "tailwind-merge": "^3.3.1",
-    "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "tailwindcss": "^4.1.17",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@analogjs/vite-plugin-angular": "^2.1.1",
-    "@analogjs/vitest-angular": "^2.1.1",
-    "@angular-eslint/builder": "21.0.1",
-    "@angular-eslint/eslint-plugin": "21.0.1",
-    "@angular-eslint/eslint-plugin-template": "21.0.1",
-    "@angular-eslint/schematics": "21.0.1",
-    "@angular-eslint/template-parser": "21.0.1",
-    "@angular/build": "^21.0.0",
-    "@angular/cli": "~21.0.0",
-    "@angular/compiler-cli": "^21.0.1",
-    "@commitlint/config-conventional": "^19.7.1",
-    "@cypress/schematic": "^2.5.1",
+    "@angular/build": "^21.0.1",
+    "@angular/cli": "^21.0.1",
+    "@angular/compiler-cli": "^21.0.0",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@cypress/schematic": "^4.1.4",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
-    "@spartan-ng/cli": "^0.0.1-alpha.567",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "@vitest/ui": "^4.0.14",
-    "autoprefixer": "^10.4.15",
-    "commitlint": "^19.7.1",
-    "cypress": "^15.7.0",
+    "@spartan-ng/cli": "^0.0.1-alpha.569",
+    "@tailwindcss/postcss": "^4.1.12",
+    "@vitest/coverage-v8": "^4.0.14",
+    "angular-eslint": "21.0.1",
+    "cypress": "15.7.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^10.0.2",
-    "eslint-plugin-prettier": "^5.2.3",
-    "eslint-plugin-unused-imports": "^4.1.4",
-    "husky": "^9.1.7",
-    "jsdom": "^27.2.0",
+    "eslint": "^9.39.1",
+    "jsdom": "^27.1.0",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.5.3",
-    "prettier": "^3.5.2",
-    "prettier-eslint": "^16.3.0",
-    "tailwindcss": "^4.1.17",
+    "prettier": "^3.7.2",
+    "tailwindcss": "^4.1.12",
     "tw-animate-css": "^1.4.0",
-    "typescript": "~5.9.3",
-    "vitest": "^4.0.14"
-  },
-  "optionalDependencies": {
-    "@nx/nx-linux-x64-gnu": "^17.2.8",
-    "@rollup/rollup-linux-x64-gnu": "^4.21.1"
+    "typescript": "~5.9.2",
+    "typescript-eslint": "8.46.4",
+    "vitest": "^4.0.8"
   }
 }
