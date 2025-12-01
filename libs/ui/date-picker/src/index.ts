@@ -10,8 +10,4 @@ export * from './lib/hlm-date-picker-multi';
 export * from './lib/hlm-date-range-picker';
 export * from './lib/hlm-date-range-picker.token';
 
-export const HlmDatePickerImports = [
-  HlmDatePicker,
-  HlmDatePickerMulti,
-  HlmDateRangePicker,
-] as const;
+export const HlmDatePickerImports = [HlmDatePicker, HlmDatePickerMulti, HlmDateRangePicker] as const;

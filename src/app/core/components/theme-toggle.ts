@@ -10,7 +10,7 @@ import {
 import { HlmButtonImports } from '@spartan-ng/helm/button';
 import { HlmIcon } from '@spartan-ng/helm/icon';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { Theme, ThemeService } from '../services/theme.service';
+import { Theme, ThemeService } from '../services/theme-service';
 
 @Component({
   selector: 'app-theme-toggle',
@@ -18,13 +18,14 @@ import { Theme, ThemeService } from '../services/theme.service';
   providers: [
     provideIcons({ lucideSun, lucideMoon, lucideMonitor, lucideCheck }),
   ],
-  template: `<button
+  template: ` <button
       hlmBtn
       variant="ghost"
       size="icon"
       [hlmDropdownMenuTrigger]="themeMenu"
       data-cy="theme-toggle"
-      aria-label="Toggle theme">
+      aria-label="Toggle theme"
+    >
       @if (theme() === 'light') {
         <ng-icon hlm name="lucideSun" size="sm" />
       } @else if (theme() === 'dark') {
@@ -65,7 +66,7 @@ import { Theme, ThemeService } from '../services/theme.service';
   styles: ``,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ThemeToggleComponent {
+export class ThemeToggle {
   private readonly themeService = inject(ThemeService);
   protected readonly theme = this.themeService.theme;
 

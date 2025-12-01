@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ENV_FILE=/usr/share/nginx/html/assets/config.json
+ENV_FILE=/usr/share/nginx/html/config.json
 
 echo "{" > $ENV_FILE
 

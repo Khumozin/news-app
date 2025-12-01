@@ -13,4 +13,5 @@
     },
     "editor.formatOnSave": false
   },
+  "typescript.referencesCodeLens.enabled": true
 }

@@ -1,5 +1,7 @@
-node prettier-hook.js
+gitleaks protect --staged --verbose --no-banner
 
-ng lint --fix
+npx lint-staged
 
-# ng test --no-watch --no-progress --browsers=ChromeHeadless
+npm run test -- --watch=false
+
+npm run cypress:run:ci

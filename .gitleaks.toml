@@ -1,0 +1,21 @@
+title = "Gitleaks Configuration"
+
+[extend]
+# useDefault will extend the base configuration with the default gitleaks config:
+# https://github.com/gitleaks/gitleaks/blob/master/config/gitleaks.toml
+useDefault = true
+
+[allowlist]
+description = "Allowlist for known safe files"
+paths = [
+  '''node_modules/''',
+  '''package-lock.json''',
+  '''.git/'''
+]
+
+# Only allow placeholder values, not real secrets
+regexes = [
+  '''PLACEHOLDER_API_KEY''',
+  '''YOUR_API_KEY_HERE''',
+  '''INSERT_API_KEY'''
+]

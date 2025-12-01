@@ -9,8 +9,7 @@ const API_RESPONSE = {
       },
       author:
         'Sam Lyman, Contributor, \n Sam Lyman, Contributor\n https://www.forbes.com/sites/samlyman/',
-      title:
-        'From Venture Capital To Wall Street, A New Paradigm Emerges: BTC = ESG',
+      title: 'From Venture Capital To Wall Street, A New Paradigm Emerges: BTC = ESG',
       description:
         "Could BTC = ESG? According to new research, the answer is a resounding yes. Here's why investors are taking a second look at bitcoin through the lens of ESG.",
       url: 'https://www.forbes.com/sites/digital-assets/2023/09/21/from-venture-capital-to-wall-street-a-new-paradigm-emerges-btc--esg/',
@@ -42,8 +41,7 @@ const API_RESPONSE = {
         name: 'CoinDesk',
       },
       author: 'Omkar Godbole',
-      title:
-        'Bitcoin Bulls Missing in Action After Mt. Gox Delays BTC Repayments',
+      title: 'Bitcoin Bulls Missing in Action After Mt. Gox Delays BTC Repayments',
       description:
         'Rumors of Mt. Gox mulling a delay have been doing the rounds and likely catalyzed the recent bitcoin price bounce.',
       url: 'https://www.coindesk.com/markets/2023/09/21/bitcoin-bulls-missing-in-action-after-mt-gox-delays-btc-repayments/',
@@ -129,8 +127,7 @@ const API_RESPONSE = {
       description:
         'The recent Ripple delisting from the New York roster of permitted cryptocurrencies raises concern within the crypto market. Despite this negative news, XRP is showing strong performance in the market....\nThe post Ripple Price Forecast: New York Regulators Del…',
       url: 'https://techreport.com/crypto-news/ripple-price-forecast-new-york-regulators-delists-ripple-whats-next-for-xrp/',
-      urlToImage:
-        'https://techreport.com/wp-content/uploads/2023/09/ripple-labs-logo.png',
+      urlToImage: 'https://techreport.com/wp-content/uploads/2023/09/ripple-labs-logo.png',
       publishedAt: '2023-09-21T01:30:39Z',
       content:
         'The recent Ripple delisting from the New York roster of permitted cryptocurrencies raises concern within the crypto market. Despite this negative news, XRP is showing strong performance in the market… [+5942 chars]',
@@ -157,8 +154,7 @@ const API_RESPONSE = {
         name: 'Yahoo Entertainment',
       },
       author: 'Tom Zuo',
-      title:
-        'Bitcoin, Ether dip; Toncoin leads crypto retreat following hawkish Fed comments',
+      title: 'Bitcoin, Ether dip; Toncoin leads crypto retreat following hawkish Fed comments',
       description:
         'Bitcoin briefly fell below US$26,900 on early Thursday morning in Asia but is now trading above US$27,000. Ether also dropped but held above US$1,600.',
       url: 'https://finance.yahoo.com/news/bitcoin-ether-dip-toncoin-leads-015341370.html',
@@ -183,7 +179,7 @@ describe('Test App', () => {
     const date = new Date();
     const day = date.getDate();
 
-    cy.intercept('GET', 'https://newsapi.org/v2/everything*', req => {
+    cy.intercept('GET', 'https://newsapi.org/v2/everything*', (req) => {
       req.reply({
         body: API_RESPONSE,
         delay: 75,
@@ -225,9 +221,6 @@ describe('Test App', () => {
 
     cy.get('div').contains(`${API_RESPONSE.totalResults}`);
 
-    cy.get('[data-cy="article"]').should(
-      'have.length',
-      API_RESPONSE.articles.length
-    );
+    cy.get('[data-cy="article"]').should('have.length', API_RESPONSE.articles.length);
   });
 });
