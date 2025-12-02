@@ -6,12 +6,12 @@ on:
       - main
 jobs:
   angular:
-    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.9.0
     with:
       node_version: "['22.x']"
 
   snyk:
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.9.0
     with:
       node_version: "['22.x']"
     secrets: inherit
@@ -24,7 +24,7 @@ jobs:
 #     secrets: inherit
 
   gitguardian:
-    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.9.0
     secrets: inherit
 
   vitest:
@@ -35,13 +35,13 @@ jobs:
 
   cypress:
     needs: [angular, snyk, gitguardian]
-    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.9.0
     with:
       node_version: "['22.x']"
 
   semantic-release:
     needs: [vitest, cypress]
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-semantic-release.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-semantic-release.yml@1.9.0
     with:
       node_version: "['22.x']"
     permissions:

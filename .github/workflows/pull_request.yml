@@ -11,11 +11,11 @@ jobs:
       node_version: "['22.x']"
 
   gitguardian:
-    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.9.0
     secrets: inherit
 
   snyk:
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.5.0
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.9.0
     with:
       node_version: "['22.x']"
     secrets: inherit
