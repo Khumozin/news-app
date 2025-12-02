@@ -6,22 +6,22 @@ on:
       - main
 jobs:
   eslint:
-    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.9.0
+    uses: khumozin/workflow-templates/.github/workflows/angular-lint-app.yml@1.10.0
     with:
       node_version: "['22.x']"
 
   gitguardian:
-    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.9.0
+    uses: khumozin/workflow-templates/.github/workflows/gitguardian-secret-scan.yml@1.10.0
     secrets: inherit
 
   snyk:
-    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.9.0
+    uses: khumozin/workflow-templates/.github/workflows/nodejs-dependency-analysis.yml@1.10.0
     with:
       node_version: "['22.x']"
     secrets: inherit
 
 #   sonar-cloud:
-#     uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.8.4
+#     uses: khumozin/workflow-templates/.github/workflows/sonar-cloud-static-code-analysis.yml@1.10.0
 #     with:
 #       project_base_directory: news-app
 #       source_folder: "src/"
@@ -29,18 +29,18 @@ jobs:
 
   angular:
     needs: [eslint, gitguardian, snyk]
-    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.9.0
+    uses: khumozin/workflow-templates/.github/workflows/angular-build-app.yml@1.10.0
     with:
       node_version: "['22.x']"
 
   vitest:
     needs: [angular]
-    uses: khumozin/workflow-templates/.github/workflows/angular-vitest-app.yml@1.9.0
+    uses: khumozin/workflow-templates/.github/workflows/angular-vitest-app.yml@1.10.0
     with:
       node_version: "['22.x']"
 
   cypress:
     needs: [angular]
-    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.9.0
+    uses: khumozin/workflow-templates/.github/workflows/angular-cypress-e2e-test-app.yml@1.10.0
     with:
       node_version: "['22.x']"
